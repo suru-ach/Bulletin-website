@@ -63,7 +63,7 @@ button:hover {
     background-color: rgb(56, 56, 218);
 }
 
-@media (min-width: 480px) {
+@media (min-width: 560px) {
     .container {
         background-color: rgba(0, 0, 0, 0.05);
     }
