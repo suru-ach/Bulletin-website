@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const connectDB = require('./db/connectDB');
+const errorMiddleware = require('./middleware/errorMiddleware');
 const app = express();
 const authRouter = require('./routes/authRoutes');
 
@@ -15,7 +16,7 @@ app.use(express.static('./public'));
 app.use(authRouter);
 
 // middlewares
-
+app.use(errorMiddleware);
 
 //connect to db
 const url = process.env.MONGO_URI_ADMIN;
