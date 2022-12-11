@@ -6,7 +6,8 @@ const {
     login
 } = require('../controllers/auth');
 
+// router for registe rand login auth
 router.route('/user/register').post(register);
-router.route('/user/login').get(login);
+router.route('/user/login').post(login);
 
 module.exports = router;

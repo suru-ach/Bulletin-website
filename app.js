@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./db/connectDB');
 const errorMiddleware = require('./middleware/errorMiddleware');
+const eventRoutes = require('./routes/eventRoutes');
 const app = express();
 const authRouter = require('./routes/authRoutes');
 
@@ -14,6 +15,7 @@ app.use(express.static('./public'));
 
 // setup routes
 app.use(authRouter);
+app.use(eventRoutes);
 
 // middlewares
 app.use(errorMiddleware);
