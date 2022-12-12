@@ -17,7 +17,7 @@ const login = async_function(async(req, res, next) => {
     const getUser = await User.findOne({email});
     // if does not exist
     if(!getUser) {
-        return next(createCustomError('email and password should not be empty', 401));
+        return next(createCustomError('email or password invalid', 401));
     }
     const isUser = await getUser.compareUserPassword(password);
     // check is password is valid

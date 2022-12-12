@@ -30,7 +30,8 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'user',
-    }
+    },
+    clubs: [String]
 });
 
 UserSchema.pre('save', async function() {
@@ -43,6 +44,7 @@ UserSchema.methods.createJWT = function() {
         username: this.user, 
         userId: this._id, 
         role: this.role,
+        clubs: this.clubs,
     },
     process.env.JWT_KEY, { expiresIn: process.env.JWT_EXPIRE }
     );

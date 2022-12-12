@@ -10,8 +10,8 @@ const authUser = (req, res, next) => {
     // validate the token, through this middleware only for admins
     try {
         const payload = jwt.verify(token, process.env.JWT_KEY);
-        const { userId, username, role } = payload;
-        req.user = { userId, username, role };
+        const { userId, username, role, clubs } = payload;
+        req.user = { userId, username, role, clubs };
         next();
         
     } catch(err) {
@@ -30,8 +30,8 @@ const authAdmin = (req, res, next) => {
     // validate the token, through this middleware only for admins
     try {
         const payload = jwt.verify(token, process.env.JWT_KEY);
-        const { userId, username, role } = payload;
-        req.user = { userId, username, role };
+        const { userId, username, role, clubs } = payload;
+        req.user = { userId, username, role, clubs };
         // allow edit only for role ADMIN not USER
         if(role != 'admin') {
             return next(createCustomError('not authorized, not admin', 401));
