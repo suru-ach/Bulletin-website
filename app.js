@@ -6,16 +6,18 @@ const errorMiddleware = require('./middleware/errorMiddleware');
 const eventRoutes = require('./routes/eventRoutes');
 const app = express();
 const authRouter = require('./routes/authRoutes');
+const adminRouter = require('./routes/adminEventRoute');
+const { authAdmin } = require('./middleware/auth');
 
-
-// middlewares setup
+// middlewares
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static('./public'));
 
-// setup routes
+// routes
 app.use(authRouter);
 app.use(eventRoutes);
+app.use(authAdmin ,adminRouter);
 
 // middlewares
 app.use(errorMiddleware);

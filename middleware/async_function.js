@@ -1,4 +1,4 @@
-const async_fucntion = (fn) => {
+const async_function = (fn) => {
     return async(req, res, next) => {
         try {
             await fn(req, res, next);
@@ -7,5 +7,6 @@ const async_fucntion = (fn) => {
         }
     }
 };
+
 // wraps every function making it async and on errors sends it to error handling middlewares
-module.exports = async_fucntion;
+module.exports = {async_function };

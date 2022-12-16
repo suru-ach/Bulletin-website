@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const { postEvent, getEvents } = require('../controllers/events');
-// const { authAdmin, authUser } = require('../middleware/auth');
+const {
+  getEvents,
+  getEvent,
+  postComment
+} = require('../controllers/events');
 
-router.route('/event').post(postEvent);
+const { authUser } = require('../middleware/auth');
+
 router.route('/event').get(getEvents);
-
-// use authAdmin for postEvent, updateEvent, deleteEvent
-// use no auth for getEvents, getEvent
-// use authUser for postComment
+router.route('/event/:id').get(getEvent).post(authUser ,postComment);
 
 module.exports = router;

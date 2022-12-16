@@ -1,5 +1,5 @@
 const User = require('../models/authModel');
-const async_function = require('../middleware/async_function');
+const { async_function } = require('../middleware/async_function');
 const { createCustomError } = require('../errors/customErrorAPI');
 
 const register = async_function(async(req, res) => {
