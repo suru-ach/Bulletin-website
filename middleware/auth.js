@@ -40,4 +40,18 @@ const authAdmin = (req, res, next) => {
     }
 };
 
-module.exports = { authUser, authAdmin };
+const authAuthor = (req, res, next) => {
+
+    // this middleware checks if the author is the one making the change
+    const isAuthor = req.user.userId === req.body.author;
+    try { 
+        if(!isAuthor) {
+            return next(createCustomError('not the author', 401));
+        }
+        next();
+    } catch(err) {
+        return next(createCustomError('bad request', 401));
+    }
+}
+
+module.exports = { authUser, authAdmin, authAuthor };

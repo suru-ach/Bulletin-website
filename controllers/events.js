@@ -6,7 +6,7 @@ const postEvent = async_function(async (req, res) => {
     
     // set up the body to save
     const image = req.file.destination+'/'+req.file.filename;
-    let body = { ...req.body, image };
+    let body = { ...req.body, image, author: req.user.userId };
     body.date = new Date(`${body.date} ${body.fromTime}`);
 
     // save the file
