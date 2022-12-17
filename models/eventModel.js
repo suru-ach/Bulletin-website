@@ -38,6 +38,9 @@ const EventModel = new mongoose.Schema({
         type: String,
         required: true,
     },
+    author: {
+        type: String
+    },
     comments: [{
         user: String,
         userId: String,

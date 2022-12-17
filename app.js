@@ -17,7 +17,7 @@ app.use(express.static('./public'));
 // routes
 app.use(authRouter);
 app.use(eventRoutes);
-app.use(authAdmin ,adminRouter);
+app.use(authAdmin, adminRouter);
 
 // middlewares
 app.use(errorMiddleware);
