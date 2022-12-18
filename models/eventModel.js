@@ -44,7 +44,10 @@ const EventModel = new mongoose.Schema({
     comments: [{
         user: String,
         userId: String,
-        comment: String
+        comment: {
+            type: String,
+            required: true
+        }
     }]
 }, {timestamps: true});
 
