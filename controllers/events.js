@@ -35,7 +35,7 @@ const deleteEvent = async_function(async(req, res) => {
 
     // deleting the event
     await Event.deleteOne({_id: eventId});
-    return res.status(201).json({msg: 'file deleted'});
+    return res.status(200).json({msg: 'file deleted'});
 });
 
 const updateEvent = async_function(async(req, res) => { 
