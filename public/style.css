@@ -70,7 +70,7 @@ body {
 }
 
 .event-card:hover {
-    background-color: rgba(0, 0, 0, 0.568);
+    /* background-color: rgba(0, 0, 0, 0.568); */
     cursor: pointer;
     transition: all 0.3s;
     filter: grayscale(1);
@@ -81,7 +81,7 @@ body {
 }
 
 .space {
-    margin: 12px;
+    margin: 10px;
 }
 
 .flat {
@@ -304,3 +304,13 @@ body {
 
   
   }
+  a:hover{
+    background-color: white;
+    color:rgb(89, 0, 255);
+    }
+  
+    a{
+      text-decoration:none;
+   color: aliceblue;
+  }
+ 
