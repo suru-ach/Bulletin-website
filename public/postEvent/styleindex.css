@@ -1,0 +1,27 @@
+body{
+    background-color:#ccd6dd;
+}
+label{
+    width: 240px;
+    display: -ms-inline-flexbox;
+}
+
+
+#wrapper{
+    background: #66757f;
+    list-style: none;
+    margin:50px;
+    padding: 20px;
+}
+#wrapper li{
+    display:flex;
+    justify-content: flex-end;
+    padding: 5px 0;
+    
+}
+#wrapper li label{
+    flex:1;
+}
+#wrapper li input{
+    flex:1;
+}
