@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calendar</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    calendar
+
+    <div class="topnav mainnav">
+        <a href="../index.html">Events</a>
+        <a href="#">Login</a>
+        <a href="#">Sign-up</a>
+        <a class="active" href="#">Calendar</a>
+        <!-- <input type="text" placeholder="Search.."> -->
+    </div>
+
+    <div class="topnav menuham">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="../index.html">Events</a>
+            <a href="#">Login</a>
+            <a href="#">Sign-up</a>
+            <a href="#">Calendar</a>
+        </div>
+
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+    </div>
+    <div style="display: flex; justify-content: center;">
+        <iframe src="https://calendar.google.com/calendar/embed?src=12dbf026c51e4f00ba7b4f099dc29b225c78bde7d500347bf8025edcfba3a302%40group.calendar.google.com&ctz=Asia%2FKolkata" style="border: 0;" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    </div>
 </body>
 </html>
