@@ -4,63 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>description form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>FORM</title>
 </head>
+
 <body>
-    <form>
-        <ul id="wrapper">
-            <li>
-    <label>Title</label>
-    
-    <input type="text" value="" id="css">
-    </li>
-    <li>
-    <label>Date</label>
-    
-    <input type="date" value="" id="">
-    </li>
-    <li>
-    <label>StartTime</label>
-    
-    <input type="time" value="" id="">
-    </li>
-    <li>
-    <label>ToTime</label>
-    
-    <input type="time" value=" " id="">
-    </li>
-    <li>
-    <label>venue</label>
-    
-    <input type="text" value="" id="">
-    </li>
-    <li>
-    <label>club</label>
-    
-    <input type="text" value="" id="">
-    </li>
-    <li>
-    <label>Image</label>
-    
-    <input type="file" value="" id="" >
-    </li>
-    <li>
-    <label>Small Descripton</label>
-    
-    <input type="text" value="" id="">
-    </li>
-    <li>
-    <label>Full Descripton</label>
-    
-    <input type="text" value="" id="">
-    </li>
-    <li>
-    <input type="submit" id="">
-    </li>
-    </ul>
-    </form>
-    
-    
+    <div class="container">
+    <form id="form">
+            Title<br><input class="input" type="text" placeholder="Title" class="input" required>
+           Date<br><input class="input" type="date" placeholder="date" class="input" required>
+           Start time<br> <input type="time" placeholder="start time" class="input" required>
+            To time<br><input type="time" placeholder="To time" class="input" required>
+            Venue<br><input type="text" placeholder="Venue" class="input" required>
+            Club<br><input type="text" placeholder="Club" class="input" required>
+            Image<br><input type="file" placeholder="image" class="input" required>
+            Small Description<br><input type="text" placeholder="Small description" class="input" required>
+            Full Description<br><input type="text" placeholder="Full descriptiion" class="input" required><br>
+            
+            <button type="submit" value="submit">
+                submit
+            </button>
+
+        </form>
+    </div>
 </body>
 </html>
