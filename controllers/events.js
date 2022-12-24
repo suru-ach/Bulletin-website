@@ -8,6 +8,7 @@ const postEvent = async_function(async (req, res) => {
     const image = req.file.destination+'/'+req.file.filename;
     let body = { ...req.body, image, author: req.user.userId };
     body.date = new Date(`${body.date} ${body.fromTime}`);
+    body.calendarID = req.calendarID;
 
     // save the file
     const newEvent = await Event.create(body);
@@ -80,4 +81,4 @@ module.exports = {
     deleteEvent,
     updateEvent,
     postComment
-}
+};

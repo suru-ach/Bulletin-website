@@ -124,6 +124,9 @@
     height: 47.33px;
     display: block;
   }
+  .event-h {
+    padding: 20px;
+  }
 }
 
 /* Style the links inside the navigation bar */
@@ -198,7 +201,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   width: 220px;
   height: 40px;
   top: -100px;
@@ -210,16 +213,16 @@ a {
 }
 
 .error {
-  top: 6px;
+  top: 55px;
   background-color: rgb(248 113 113);
 }
 
 .success {
-  top: 6px;
+  top: 55px;
   background-color: rgb(74 222 128);
 }
 
 .message {
-  top: 6px;
+  top: 55px;
   background-color: rgb(129 140 248);
 }

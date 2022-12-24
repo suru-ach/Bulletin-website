@@ -39,14 +39,18 @@ const EventModel = new mongoose.Schema({
         required: true,
     },
     author: {
-        type: String
+        type: String,
+        required: true
+    },
+    calendarID: {
+        type: String,
+        required: true
     },
     comments: [{
         user: String,
         userId: String,
         comment: {
-            type: String,
-            required: true
+            type: String
         }
     }]
 }, {timestamps: true});

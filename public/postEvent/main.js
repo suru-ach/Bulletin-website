@@ -1,10 +1,25 @@
-
 const alertDiv = document.querySelector('.alertDiv');
 const postEvent = document.getElementById('postEvent');
+const user = document.querySelector('.user');
+const submitButton = postEvent.querySelector('button');
+
+const setLocalStorage = (username, token, role) => {
+    localStorage.setItem('user', username);
+    localStorage.setItem('token', `${token}`);
+    localStorage.setItem('role', role);
+}
+
+const setUser = () => {
+    const username = localStorage.getItem('user');
+    const role = localStorage.getItem('role');
+    user.innerHTML = username || 'guest';
+    postEvent.style.display = (role == 'admin') ? 'block' : 'none';
+}
 
 const submitData = async (e) => {
+    submitButton.disabled = true;
     e.preventDefault();
-
+    
     alertDiv.innerHTML = 'saving';
     alertDiv.classList.add('message');
 
@@ -29,7 +44,7 @@ const submitData = async (e) => {
     formData.append('club', input_club.value);
     formData.append('eventImage', input_image.files[0]);
     formData.append('smallDesc', input_smallDesc.value);
-    formData.append('fullDesc', fullDesc.value);
+    formData.append('fullDesc', input_fullDesc.value);
 
     try {
         const res = await axios.post('/admin/event', formData, {
@@ -55,8 +70,12 @@ const submitData = async (e) => {
         alertDiv.classList.remove('error');
         alertDiv.classList.remove('success');
     }, 10000);
+    submitButton.disabled = false;
 }
+setUser();
+
 postEvent.addEventListener('submit', (e) => submitData(e));
+
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
