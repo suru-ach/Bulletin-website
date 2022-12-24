@@ -10,6 +10,7 @@ const commentValue = commentPost.querySelector('input');
 const submitButton = commentPost.querySelector('button');
 const deleteButton = document.getElementById('delete');
 let calendar = '';
+let id = '';
 
 const url = window.location.search.split('=')[1];
 
@@ -110,16 +111,19 @@ const postComment = async (e) => {
         alertDiv.classList.remove('message');
         alertDiv.classList.add('success');
         commentValue.value = '';
+        getData(url);
     } catch (err) {
         alertDiv.innerHTML = 'not authorized';
         alertDiv.classList.remove('message');
         alertDiv.classList.add('error');
     }
-
+    
     setTimeout(() => {
         alertDiv.classList.remove('error');
         alertDiv.classList.remove('success');
     }, 3000);
+
+
     submitButton.disabled = false;
 }
 
@@ -145,7 +149,7 @@ const deleteData = async (e) => {
         alertDiv.innerHTML = 'deleted successfully';
         alertDiv.classList.remove('message');
         alertDiv.classList.add('error');
-        getData();
+        getData(url);
     } catch(err) {
         alertDiv.innerHTML = err.response.data.msg;
         alertDiv.classList.remove('message');
