@@ -69,7 +69,7 @@ const submitData = async (e) => {
     setTimeout(() => {
         alertDiv.classList.remove('error');
         alertDiv.classList.remove('success');
-    }, 10000);
+    }, 3000);
     submitButton.disabled = false;
 }
 setUser();

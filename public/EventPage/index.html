@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,7 +15,7 @@
         <a href="../index.html">Events</a>
         <a href="../login/index.html">Login</a>
         <a href="../register/index.html">Sign-up</a>
-        <a class="active" href="#">Calendar</a>
+        <a href="../CalendarPage/index.html">Calendar</a>
         <a href="../postEvent/index.html" class="postEvent" style="display: none;">PostEvent</a>
         <a class="user" style="float: right;"></a>
     </div>
@@ -25,7 +25,7 @@
             <a href="../index.html">Events</a>
             <a href="../login/index.html">Login</a>
             <a href="../register/index.html">Sign-up</a>
-            <a href="#">Calendar</a>
+            <a href="../CalendarPage/index.html">Calendar</a>
             <a href="../postEvent/index.html" class="postEvent" style="display: none;">PostEvent</a>
         </div>
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">
@@ -33,28 +33,23 @@
             <a class="user" style="float: right;"></a>
         </span>
     </div>
-    <div class="container">
-        <div class="sub-container">
-            <div>
-                <h2>Title</h2>
-            </div>
-            <img src="../uploads/img_1671346008598.jpg" alt="">
-        </div>
 
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi
-            lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue
-            eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare
-            eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis
-            dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare
-            turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed
-            dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.
-        </p>
-    </div>
+    
+  <div class="alertDiv">
+    Loading...
+  </div>
+
+    <div class="container"></div>
+    <div class="comment-post">
+        <form id="comment-post">
+            <h3>Comments</h3>
+            <input type="text" required>
+            <button type="submit">comment</button>
+        </form>
     </div>
 </body>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="./main.js"></script>
 
-</html> -->
+</html>

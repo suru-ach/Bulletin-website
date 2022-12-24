@@ -71,7 +71,7 @@ const postComment = async_function(async(req, res, next) => {
     event.comments.push({user: req.user.username, userId: req.user.userId, ...req.body});
     await event.save();
 
-    res.status(200).json(event);
+    res.status(201).json(event);
 });
 
 module.exports = {
