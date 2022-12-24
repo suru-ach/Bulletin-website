@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,14 @@
     <title>Calendar</title>
     <link rel="stylesheet" href="../style.css">
 </head>
-<body>
 
+<body>
     <div class="topnav mainnav">
         <a href="../index.html">Events</a>
-        <a href="#">Login</a>
+        <a href="../login/index.html">Login</a>
         <a href="#">Sign-up</a>
         <a class="active" href="#">Calendar</a>
+        <a class="user" style="float: right;">guest</a>
         <!-- <input type="text" placeholder="Search.."> -->
     </div>
 
@@ -21,13 +23,15 @@
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="../index.html">Events</a>
-            <a href="#">Login</a>
+            <a href="../login/index.html">Login</a>
             <a href="#">Sign-up</a>
             <a href="#">Calendar</a>
         </div>
 
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">
+            <p>&#9776; Menu</p>
+            <a class="user" style="float: right;">guest</a>
+        </span>
         <script>
             function openNav() {
                 document.getElementById("mySidenav").style.width = "250px";
@@ -39,7 +43,22 @@
         </script>
     </div>
     <div style="display: flex; justify-content: center;">
-        <iframe src="https://calendar.google.com/calendar/embed?src=12dbf026c51e4f00ba7b4f099dc29b225c78bde7d500347bf8025edcfba3a302%40group.calendar.google.com&ctz=Asia%2FKolkata" style="border: 0;" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        <iframe
+            src="https://calendar.google.com/calendar/embed?src=12dbf026c51e4f00ba7b4f099dc29b225c78bde7d500347bf8025edcfba3a302%40group.calendar.google.com&ctz=Asia%2FKolkata"
+            style="border: 0;" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
 </body>
+<script>
+    const user = document.querySelector('.user');
+    const postEvent = document.querySelector('.postEvent');
+
+    const setUser = () => {
+        const username = localStorage.getItem('user');
+        const role = localStorage.getItem('role');
+        user.innerHTML = username || 'guest';
+        postEvent.style.display = (role == 'admin') ? 'block' : 'none';
+    }
+    setUser();
+</script>
+
 </html>

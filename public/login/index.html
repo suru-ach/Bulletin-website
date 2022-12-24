@@ -1,47 +1,67 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css" />
-  <title>register page</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="../style.css">
+  <title>Login Page</title>
 </head>
-  <body>
-    <div class="login-wrapper">
-      <form action="" class="form">
-        <h2>Register here</h2>
-        <div class="input-group">
-          <input type="text" name="loginUser" id="loginUser" required />
-          <label for="loginUser">User Name</label>
-        </div>
 
+<body>
+  <div class="topnav mainnav">
+    <a href="../index.html">Events</a>
+    <a href="#" class="active">Login</a>
+    <a href="#">Sign-up</a>
+    <a href="../CalendarPage/index.html">Calendar</a>
+    <a class="user" style="float: right;">guest</a>
+    <!-- <input type="text" placeholder="Search.."> -->
+  </div>
 
+  <div class="topnav menuham">
+    <div id="mySidenav" class="sidenav links">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="../index.html">Events</a>
+      <a href="#">Login</a>
+      <a href="#">Sign-up</a>
+      <a href="../CalendarPage/index.html">Calendar</a>
+    </div>
 
-        <div class="input-group">
-            <input type="email" name="enteremail" id="enteremail" required />
-            <label for="enteremail">email</label>
-          </div>
-        <div class="input-group">
-          <input
-            type="password"
-            name="loginPassword"
-            id="loginPassword"
-            required
-          />
-          <label for="loginPassword">Password</label>
-        </div>
-        
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">
+      <p>&#9776; Menu</p>
+      <a class="user" style="float: right;">guest</a>
+    </span>
 
-        CLUBS:<BR>
-        <input type="checkbox" value="AURA" name="">AURA
-        <input type="checkbox" value="FLC" name="">FLC
-        <input type="checkbox" value="MUSIC" name="">MUSIC
-        <br>
-        <input type="submit" value="Signup" class="submit-btn" />
-      
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+    </script>
+  </div>
+
+  <div class="alertDiv">
+    Loading
+  </div>
+  <div class="container">
+    <div class="register-box">
+      <form class="register">
+        <h1>Login Page</h1>
+        <label for="email">email</label>
+        <input type="email" id="email" required>
+        <label for="password">password</label>
+        <input type="password" id="password" required>
+        <button type="submit">Sign In</button>
       </form>
     </div>
-  </body>
+  </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./main.js"></script>
+</body>
+
 </html>

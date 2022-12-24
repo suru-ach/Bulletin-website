@@ -4,28 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <title>EventPage</title>
 </head>
 <body>
     <div class="topnav mainnav">
         <a class="active" href="#">Events</a>
-        <a href="#">Login</a>
+        <a href="./login/index.html">Login</a>
         <a href="#">Sign-up</a>
-        <a href="#">About</a>
+        <a href="./CalendarPage/index.html">Calendar</a>
+        <a href="./postEvent/index.html" class="postEvent">PostEvent</a>
+        <a class="user" style="float: right;">guest</a>
         <!-- <input type="text" placeholder="Search.."> -->
     </div>
-
+    
     <div class="topnav menuham">
-        <div id="mySidenav" class="sidenav">
+        <div id="mySidenav" class="sidenav links">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="#">Events</a>
-            <a href="#">Login</a>
+            <a href="./login/index.html">Login</a>
             <a href="#">Sign-up</a>
-            <a href="#">About</a>
+            <a href="./CalendarPage/index.html">Calendar</a>
+            <a href="./postEvent/index.html" class="postEvent">PostEvent</a>
         </div>
-
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+        
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">
+            <p>&#9776; Menu</p>
+            <a class="user" style="float: right;">guest</a>
+        </span>
 
         <script>
             function openNav() {
@@ -36,76 +42,13 @@
                 document.getElementById("mySidenav").style.width = "0";
             }
         </script>
-        <!-- <input type="text" placeholder="Search.."> -->
     </div>
     <div class="container">
-
-        <!--testing events-->
-        <h1 class="event-h">EVENTS in NMAMIT</h1>
-
+        <h1 class="event-h">EVENTS</h1>
         <div class="events">
-            <div class="event-card" data-index="0">
-                <a href="#">
-
-                    <img src="" alt="">
-                    <p class="sponsor-text space"></p>
-                    <p class="space"></p>
-                    <h2 class="space">Title</h2>
-                    <p class="venue-text space">venue</p>
-                    <div class="space flat">
-                        <p>4:00<p>
-                            <span class="bar">-</span>
-                            <p>6:30 </p>
-                        </div>
-                    </a>
-            </div>
-            <div class="event-card" data-index="0">
-                <a href="#">
-
-                    <img src="" alt="">
-                    <p class="sponsor-text space"></p>
-                    <p class="space"></p>
-                    <h2 class="space">Title</h2>
-                    <p class="venue-text space">venue</p>
-                    <div class="space flat">
-                        <p>4:00<p>
-                            <span class="bar">-</span>
-                            <p>6:30 </p>
-                        </div>
-                    </a>
-            </div>
-            <div class="event-card" data-index="0">
-                <a href="#">
-
-                    <img src="" alt="">
-                    <p class="sponsor-text space"></p>
-                    <p class="space"></p>
-                    <h2 class="space">Title</h2>
-                    <p class="venue-text space">venue</p>
-                    <div class="space flat">
-                        <p>4:00<p>
-                            <span class="bar">-</span>
-                            <p>6:30 </p>
-                        </div>
-                    </a>
-            </div>
-            <div class="event-card" data-index="0">
-                <a href="#">
-
-                    <img src="" alt="">
-                    <p class="sponsor-text space"></p>
-                    <p class="space"></p>
-                    <h2 class="space">Title</h2>
-                    <p class="venue-text space">venue</p>
-                    <div class="space flat">
-                        <p>4:00<p>
-                            <span class="bar">-</span>
-                            <p>6:30 </p>
-                        </div>
-                    </a>
-            </div>
-            
         </div>
     </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./main.js"></script>
 </body>
 </html>
