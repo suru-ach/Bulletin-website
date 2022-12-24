@@ -3,6 +3,7 @@ const user = document.querySelector('.user');
 const register = document.querySelector('.register');
 const input_email = document.getElementById('email');
 const input_password = document.getElementById('password');
+const postEvent = document.querySelector('.postEvent');
 
 const alertDiv = document.querySelector('.alertDiv');
 
@@ -14,7 +15,9 @@ const setLocalStorage = (username, token, role) => {
 
 const setUser = () => {
     const username = localStorage.getItem('user');
+    const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
+    postEvent.style.display = (role == 'admin') ? 'block' : 'none';
 }
 
 const submitData = async (e) => {
@@ -48,7 +51,14 @@ const submitData = async (e) => {
         alertDiv.classList.remove('success');
     }, 3000);
 }
-
 setUser();
 
 register.addEventListener('submit', (e) => submitData(e));
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}

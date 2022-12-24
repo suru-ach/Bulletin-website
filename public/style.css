@@ -1,11 +1,10 @@
-* {
+/* imported fonts */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600&display=swap');
+
+*{
   margin: 0;
   padding: 0;
-}
-
-/* navbar */
-body {
-  font-family: "Lato", sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .sidenav {
@@ -81,16 +80,17 @@ body {
   filter: grayscale(1);
 }
 .event-card:hover img {
-  opacity: 10%;
+  opacity: 40%;
 }
 
 .event-card img {
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   width: 304px;
   height: 145.3px;
-  opacity: 10%;
+  opacity: 30%;
 }
 
 .space {
@@ -222,8 +222,4 @@ a {
 .message {
   top: 6px;
   background-color: rgb(129 140 248);
-}
-
-.user {
-  
 }
