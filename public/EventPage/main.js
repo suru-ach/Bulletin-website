@@ -2,11 +2,14 @@ const user = document.querySelector('.user');
 const postEvent = document.querySelector('.postEvent');
 const eventContent = document.querySelector('.container');
 
+const container = document.querySelector('.container-full');
 const alertDiv = document.querySelector('.alertDiv');
 
 const commentPost = document.getElementById('comment-post');
 const commentValue = commentPost.querySelector('input');
 const submitButton = commentPost.querySelector('button');
+const deleteButton = document.getElementById('delete');
+let calendar = '';
 
 const url = window.location.search.split('=')[1];
 
@@ -16,7 +19,6 @@ const setUser = () => {
     user.innerHTML = username || 'guest';
     postEvent.style.display = (role == 'admin') ? 'block' : 'none';
 }
-setUser();
 
 const getHTML = async (eventData) => {
     const {
@@ -32,6 +34,7 @@ const getHTML = async (eventData) => {
         comments,
         venue
     } = eventData;
+    calendar = calendarID;
     const imageData = image.split('./public')[1];
     return `
     <div class="sub-container" id="${calendarID}">
@@ -44,20 +47,20 @@ const getHTML = async (eventData) => {
                 <p>ends at: ${toTime}</p>
                 <p>${smallDesc}</p>
                 <p>${club == 'ALL' ? 'open to all' : 'by ' + club}</p>
-            </div>
+                </div>
         </div>
         <img src="..${imageData}" alt="imageData">
     </div>
     <div>
-        <div class="description">
-            <p>${'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam necessitatibus, accusantium ea quis voluptatibus possimus animi mollitia id itaque, totam autem natus? Doloribus in accusantium nihil nesciunt fugit expedita veniam!'}</p>
+    <div class="description">
+            <p>${fullDesc}</p>
         </div>
         <div class="comments">
-            <h3>comments</h3>
-            <ul class="comment-list">
-                ${comments.length ? 
-                    comments.map(({ user, comment, userId }) => {
-        return `
+        <h3>comments</h3>
+        <ul class="comment-list">
+        ${comments.length ? 
+            comments.map(({ user, comment, userId }) => {
+                return `
                     <li id="${userId}">
                         <p class="user"><span style="color: rgba(0,0,139,1);">${user}</span> posted a comment</p>
                         <p class="user-comment">${comment}</p>
@@ -67,13 +70,15 @@ const getHTML = async (eventData) => {
 :   '<li><p>no comments</p></li>'
 }
             </ul>
-        </div>
-    </div>
-    `;
+            </div>
+            </div>
+            `;
 }
 
 const getData = async (url) => {
-    eventContent.innerHTML = '<h2 style="margin-top: 60px;">Loading...</h2>';
+    eventContent.innerHTML = '';
+    alertDiv.innerHTML = 'loading...';
+    alertDiv.classList.add('message');
     try {
         const payload = await axios.get(`/event/${url}`);
         const populate = await getHTML(payload.data);
@@ -81,16 +86,16 @@ const getData = async (url) => {
     } catch (err) {
         eventContent.innerHTML = '<h1>No Events found</h1>';
     }
+    alertDiv.classList.remove('message');
 }
-getData(url);
 
 const postComment = async (e) => {
     submitButton.disabled = true;
     e.preventDefault();
-
+    
     alertDiv.innerHTML = 'posting';
     alertDiv.classList.add('message');
-
+    
     try {
         const res = await axios.post(`/event/${url}`, { comment: commentValue.value } ,{
             headers: {
@@ -118,7 +123,46 @@ const postComment = async (e) => {
     submitButton.disabled = false;
 }
 
+const deleteData = async (e) => {
+    e.preventDefault();
+    if(!window.confirm('sure you want to delete?')) {
+        return;
+    }
+
+    alertDiv.innerHTML = 'deleting';
+    alertDiv.classList.add('message');
+
+    try {
+        const res = await axios.delete(`/admin/event/${url}?calendarID=${calendar}`, {
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        console.log(res);
+        if(res.status != 200) {
+            throw Error(res);
+        }
+        alertDiv.innerHTML = 'deleted successfully';
+        alertDiv.classList.remove('message');
+        alertDiv.classList.add('error');
+        getData();
+    } catch(err) {
+        alertDiv.innerHTML = err.response.data.msg;
+        alertDiv.classList.remove('message');
+        alertDiv.classList.add('error');
+    }
+
+    setTimeout(() => {
+        alertDiv.classList.remove('error');
+        alertDiv.classList.remove('success');
+    }, 3000);
+}
+
 commentPost.addEventListener('submit', (e) => postComment(e));
+deleteButton.addEventListener('click', (e) => deleteData(e));
+
+getData(url);
+setUser();
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

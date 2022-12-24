@@ -226,3 +226,7 @@ a {
   top: 55px;
   background-color: rgb(129 140 248);
 }
+
+button {
+  cursor: pointer;
+}

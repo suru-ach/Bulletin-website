@@ -39,15 +39,22 @@
     Loading...
   </div>
 
-    <div class="container"></div>
-    <div class="comment-post">
-        <form id="comment-post">
-            <h3>Comments</h3>
-            <input type="text" required>
-            <button type="submit">comment</button>
-        </form>
+    <div class="container-full">
+      <div class="container"></div>
+
+        <div class="comment-post">
+            <button style="background-color: rgba(0, 0, 0, 0.738);" id="update">update</button>
+            <button style="background-color: rgb(229, 57, 57);" id="delete">delete</button>
+        </div>
+        <div class="comment-post">
+            <form id="comment-post">
+                <h3>Comments</h3>
+                <input type="text" required>
+                <button type="submit">comment</button>
+            </form>
+        </div>
     </div>
-</body>
+
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="./main.js"></script>
