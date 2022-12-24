@@ -48,6 +48,7 @@ const getHTML = async (eventData) => {
                 <p>ends at: ${toTime}</p>
                 <p>${smallDesc}</p>
                 <p>${club == 'ALL' ? 'open to all' : 'by ' + club}</p>
+                <a href="../updateEvent/index.html?id=${url}" style="cursor: hover; color: rgba(0, 0, 255, 1);">click to edit</a> 
                 </div>
         </div>
         <img src="..${imageData}" alt="imageData">

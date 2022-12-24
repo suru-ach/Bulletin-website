@@ -3,10 +3,11 @@ const postEvent = document.querySelector('.postEvent');
 
 const alertDiv = document.querySelector('.alertDiv');
 
-const setLocalStorage = (username, token, role) => {
+const setLocalStorage = (username, token, role, clubs) => {
     localStorage.setItem('user', username);
     localStorage.setItem('token', `${token}`);
     localStorage.setItem('role', role);
+    localStorage.setItem('clubs', clubs);
 }
 
 const setUser = () => {
@@ -43,7 +44,7 @@ const submitData = async (e) => {
         alertDiv.classList.remove('message');
         alertDiv.classList.add('success');
         register.reset();
-        setLocalStorage(res.data.username, res.data.token, res.data.role);
+        setLocalStorage(res.data.username, res.data.token, res.data.role, res.data.clubs);
         setUser();
     } catch(err) {
         alertDiv.innerHTML = err.response.data.msg;

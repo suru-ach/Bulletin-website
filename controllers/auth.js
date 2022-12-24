@@ -5,7 +5,7 @@ const { createCustomError } = require('../errors/customErrorAPI');
 const register = async_function(async(req, res) => {
     const newUser = await User.create(req.body);
     const token = newUser.createJWT();
-    res.status(201).json({token, username: newUser.user, role: newUser.role});
+    res.status(201).json({token, username: newUser.user, role: newUser.role, clubs: newUser.clubs});
 });
 
 const login = async_function(async(req, res, next) => {
@@ -25,7 +25,7 @@ const login = async_function(async(req, res, next) => {
         return next(createCustomError('email or password not valid', 401));
     }
     const token = getUser.createJWT();
-    res.status(200).json({token, username: getUser.user, role: getUser.role});
+    res.status(200).json({token, username: getUser.user, role: getUser.role, clubs: getUser.clubs});
 });
 
 module.exports = {

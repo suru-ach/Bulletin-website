@@ -43,8 +43,7 @@ UserSchema.methods.createJWT = function() {
     const token = jwt.sign({
         username: this.user, 
         userId: this._id, 
-        role: this.role,
-        clubs: this.clubs,
+        role: this.role
     },
     process.env.JWT_KEY, { expiresIn: process.env.JWT_EXPIRE }
     );
