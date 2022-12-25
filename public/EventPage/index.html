@@ -17,6 +17,7 @@
         <a href="../register/index.html">Sign-up</a>
         <a href="../CalendarPage/index.html">Calendar</a>
         <a href="../postEvent/index.html" class="postEvent" style="display: none;">PostEvent</a>
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <div class="user" style="float: right;">
             <p>guest</p>
         </div>
@@ -37,15 +38,15 @@
             <p>&#9776; Menu</p>
         </span>
     </div>
-
     
-  <div class="alertDiv">
-    Loading...
-  </div>
-
+    
+    <div class="alertDiv">
+        Loading...
+    </div>
+    
     <div class="container-full">
-      <div class="container"></div>
-
+        <div class="container" data-aos="fade-in" data-aos-delay="400"></div>
+        
         <div class="comment-post">
             <button style="background-color: rgb(229, 57, 57); display: none;" id="delete">delete</button>
         </div>
@@ -60,6 +61,8 @@
 
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
 <script src="./main.js"></script>
 
 </html>

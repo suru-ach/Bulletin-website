@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="../style.css">
-  <title>Register Page</title>
-</head>
-
-<body>
-  <div class="topnav mainnav">
-    <a href="../index.html">Events</a>
-    <a href="../login/index.html">Login</a>
-    <a href="#" class="active">Sign-up</a>
-    <a href="../CalendarPage/index.html">Calendar</a>
-    <a href="../postEvent/index.html" class="postEvent" style="display: none;">PostEvent</a>
-    <div class="user" style="float: right;">
-        <p>guest</p>
-    </div>
-    <span class="user-float modal-view">
-    </span>
-  </div>
   
-  <div class="topnav menuham">
-    <div id="mySidenav" class="sidenav links">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Register Page</title>
+  </head>
+  
+  <body>
+    <div class="topnav mainnav">
       <a href="../index.html">Events</a>
       <a href="../login/index.html">Login</a>
-      <a href="#">Sign-up</a>
+      <a href="#" class="active">Sign-up</a>
       <a href="../CalendarPage/index.html">Calendar</a>
       <a href="../postEvent/index.html" class="postEvent" style="display: none;">PostEvent</a>
-      <div class="sm-user"></div>
+      <div class="user" style="float: right;">
+        <p>guest</p>
+      </div>
+      <span class="user-float modal-view">
+      </span>
     </div>
-
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">
-      <p>&#9776; Menu</p>
-    </span>
-  </div>
-
-  <div class="alertDiv">
-    Loading
+    
+    <div class="topnav menuham">
+      <div id="mySidenav" class="sidenav links">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="../index.html">Events</a>
+        <a href="../login/index.html">Login</a>
+        <a href="#">Sign-up</a>
+        <a href="../CalendarPage/index.html">Calendar</a>
+        <a href="../postEvent/index.html" class="postEvent" style="display: none;">PostEvent</a>
+        <div class="sm-user"></div>
+      </div>
+      
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()">
+        <p>&#9776; Menu</p>
+      </span>
+    </div>
+    
+    <div class="alertDiv">
+      Loading
   </div>
   <div class="container">
-    <div class="register-box">
-        <form class="register">
-            <h1>Register Page</h1>
-            <label for="username">username</label>
-            <input type="text" id="username" required>
-            <label for="email">email</label>
-            <input type="email" id="email" required>
-            <label for="password">password</label>
-            <input type="password" id="password" required>
-            <p>Clubs</p>
-            <fieldset id="clubs">
-                <label for="aura">aura</label>
-                <input type="checkbox" id="aura">
-                <label for="flc">flc</label>
-                <input type="checkbox" id="flc">
-                <label for="music">music</label>
-                <input type="checkbox" id="music">
-            </fieldset>
-            <button type="submit">Sign Up</button>
-        </form>
+    <div class="register-box" data-aos="fade-up">
+      <form class="register">
+        <h1>Register Page</h1>
+        <label for="username">username</label>
+        <input type="text" id="username" required>
+        <label for="email">email</label>
+        <input type="email" id="email" required>
+        <label for="password">password</label>
+        <input type="password" id="password" required>
+        <p>Clubs</p>
+        <fieldset id="clubs">
+          <label for="aura">aura</label>
+          <input type="checkbox" id="aura">
+          <label for="flc">flc</label>
+          <input type="checkbox" id="flc">
+          <label for="music">music</label>
+          <input type="checkbox" id="music">
+        </fieldset>
+        <button type="submit">Sign Up</button>
+      </form>
     </div>
   </div>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
   <script src="./main.js"></script>
 </body>
 
