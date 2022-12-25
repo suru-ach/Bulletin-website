@@ -14,6 +14,7 @@ let calendar = '';
 let id = '';
 
 const userModal = document.querySelector('.user-float');
+const smUser = document.querySelector('.sm-user');
 
 const url = window.location.search.split('=')[1];
 
@@ -22,8 +23,11 @@ const setUser = () => {
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
     postEvent.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
-    userModal.innerHTML = `<p>logged in as</p><p>${username || 'guest'}</p>${(role == 'admin' ? '<button class="logout" onClick=deleteUser()>logout</button>' : '' )}`;
+    deleteButton.style.display = (role == 'admin') ? 'block' : 'none';
+    userModal.innerHTML = `<p>logged in as</p><p>${username || 'guest'}</p>${(role ? '<button class="logout" onClick=deleteUser()>logout</button>' : '' )}`;
+    smUser.innerHTML = `<p>logged in as ${username || 'guest'}</p>${role ? '<button onclick=deleteUser()>logout</button>':''}`;
 }
+
 const deleteUser = () => {
     localStorage.clear();
     setUser();
