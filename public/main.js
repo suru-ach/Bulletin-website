@@ -35,7 +35,8 @@ const getClubs = (data) => {
     // returns set of all clubs
     const clubs = data.map(event => event.club.toLowerCase());
     clubs.push('all');
-    const clubsOptions = clubs.map(club => `<option value="${club}" ${club == 'all' ? 'selected' : ''}>${club}</option>`).join('');
+    const clubSet = Array.from(new Set(clubs));
+    const clubsOptions = clubSet.map(club => `<option value="${club}" ${club == 'all' ? 'selected' : ''}>${club}</option>`).join('');
     clubInput.innerHTML = clubsOptions;
 }
 

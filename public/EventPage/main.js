@@ -41,7 +41,7 @@ const getHTML = async (eventData) => {
     const editURL = `<a href="../updateEvent/index.html?id=${url}" style="cursor: hover; color: rgba(0, 0, 255, 1);">click to edit</a>`;
     return `
     <div class="sub-container" id="${calendarID}">
-        <div class="content-page">
+    <div class="content-page">
             <div class="smallDesc">
                 <h1>${title}</h1>
                 <p>venue: ${venue}</p>
@@ -57,7 +57,7 @@ const getHTML = async (eventData) => {
     </div>
     <div>
     <div class="description">
-            <p>${fullDesc}</p>
+    <p>${fullDesc}</p>
         </div>
         <div class="comments">
         <h3>comments</h3>
@@ -71,12 +71,12 @@ const getHTML = async (eventData) => {
                     </li>
                     `
     }).join('')
-:   '<li><p>no comments</p></li>'
+    :   '<li><p>no comments</p></li>'
 }
-            </ul>
-            </div>
-            </div>
-            `;
+</ul>
+</div>
+</div>
+`;
 }
 
 const getData = async (url) => {
@@ -88,6 +88,8 @@ const getData = async (url) => {
         const populate = await getHTML(payload.data);
         eventContent.innerHTML = populate;
     } catch (err) {
+        deleteButton.style.display = 'none';
+        commentPost.style.display = 'none';
         eventContent.innerHTML = '<h1>No Events found</h1>';
     }
     alertDiv.classList.remove('message');

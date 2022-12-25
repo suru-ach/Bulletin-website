@@ -52,7 +52,6 @@
 }
 
 .events {
-  background-color: rgba(0, 0, 0, 0.905);
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
