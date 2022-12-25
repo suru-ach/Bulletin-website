@@ -1,12 +1,13 @@
 const events = document.querySelector('.events');
 const user = document.querySelector('.user');
-const postEvent = document.querySelector('.postEvent');
+const postEvent = document.querySelectorAll('.postEvent');
+const clubInput = document.getElementById('club');
 
 const setUser = () => {
     const username = localStorage.getItem('user');
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
-    postEvent.style.display = (role == 'admin') ? 'block' : 'none';
+    postEvent.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
 }
 
 const sortByDate = (data) => {
@@ -15,6 +16,27 @@ const sortByDate = (data) => {
         return new Date(a.date) - new Date(b.date);
     })
     return sortedData;
+}
+
+const sortByClubs = async (e) => {
+    console.log(e.target.value);
+    const { value } = e.target;
+    if(value == 'all') {
+        return getContent('/event');
+    }
+    events.innerHTML = '<div style="font-size: 30px; background-color: white;">Loading...</div>';
+    const sortedData = sortByDate(contextData);
+    const clubSort = sortedData.filter(event => event.club.toLowerCase() == value);
+    const eventsHTML = createHTML(clubSort);
+    events.innerHTML = eventsHTML;
+}
+
+const getClubs = (data) => {
+    // returns set of all clubs
+    const clubs = data.map(event => event.club.toLowerCase());
+    clubs.push('all');
+    const clubsOptions = clubs.map(club => `<option value="${club}" ${club == 'all' ? 'selected' : ''}>${club}</option>`).join('');
+    clubInput.innerHTML = clubsOptions;
 }
 
 const createHTML = (data) => {
@@ -58,7 +80,10 @@ const getContent = async(url) => {
     events.innerHTML = '<div style="font-size: 30px; background-color: white;">Loading...</div>';
     try {
         const payload = await axios.get(url);
-        const eventsHTML = createHTML(sortByDate(payload.data));
+        contextData = payload.data;
+        const sortedData = sortByDate(payload.data);
+        const eventsHTML = createHTML(sortedData);
+        getClubs(sortedData);
         events.innerHTML = eventsHTML;
     } catch(err) {
         events.innerHTML = `<div style="font-size: 30px; background-color: white;">something went wrong, ;(</div>`;
@@ -67,6 +92,8 @@ const getContent = async(url) => {
 
 setUser();
 getContent('/event');
+
+clubInput.addEventListener('change', (e) => sortByClubs(e));
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

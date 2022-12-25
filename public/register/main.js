@@ -1,5 +1,5 @@
 const user = document.querySelector('.user');
-const postEvent = document.querySelector('.postEvent');
+const postEvent = document.querySelectorAll('.postEvent');
 
 const alertDiv = document.querySelector('.alertDiv');
 
@@ -14,7 +14,7 @@ const setUser = () => {
     const username = localStorage.getItem('user');
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
-    postEvent.style.display = (role == 'admin') ? 'block' : 'none';
+    postEvent.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
 }
 
 const register = document.querySelector('.register');

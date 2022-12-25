@@ -3,7 +3,8 @@ const user = document.querySelector('.user');
 const register = document.querySelector('.register');
 const input_email = document.getElementById('email');
 const input_password = document.getElementById('password');
-const postEvent = document.querySelector('.postEvent');
+const postEvent = document.querySelectorAll('.postEvent');
+const logout = document.getElementById('logout');
 
 const alertDiv = document.querySelector('.alertDiv');
 
@@ -18,7 +19,8 @@ const setUser = () => {
     const username = localStorage.getItem('user');
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
-    postEvent.style.display = (role == 'admin') ? 'block' : 'none';
+    logout.style.display = (role) ? 'block' : 'none';
+    postEvent.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
 }
 
 const submitData = async (e) => {
@@ -55,6 +57,10 @@ const submitData = async (e) => {
 setUser();
 
 register.addEventListener('submit', (e) => submitData(e));
+logout.addEventListener('click', () => {
+    localStorage.clear();
+    setUser();
+});
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

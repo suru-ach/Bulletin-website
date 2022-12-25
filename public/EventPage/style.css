@@ -141,6 +141,9 @@ ul {
 }
 
 @media screen and (max-width: 500px) {
+    .container-full { 
+        overflow-x: hidden;
+    }
     .sub-container {
         flex-direction: column;
         width: 100%;

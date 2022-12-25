@@ -1,4 +1,5 @@
 const alertDiv = document.querySelector('.alertDiv');
+const postEventrole = document.querySelectorAll('.postEvent');
 const postEvent = document.getElementById('postEvent');
 const user = document.querySelector('.user');
 const submitButton = postEvent.querySelector('button');
@@ -20,7 +21,7 @@ const setUser = () => {
     const username = localStorage.getItem('user');
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
-    postEvent.style.display = (role == 'admin') ? 'block' : 'none';
+    postEventrole.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
 }
 
 const populate = async() => {
@@ -32,6 +33,7 @@ const populate = async() => {
         if(res.status !== 200) {
             throw Error(res);
         }
+        alertDiv.innerHTML = 'saved';
         alertDiv.classList.remove('message');
     } catch(err) {
         alertDiv.innerHTML = 'error';
@@ -59,8 +61,6 @@ const submitData = async (e) => {
     alertDiv.innerHTML = 'saving';
     alertDiv.classList.add('message');
 
-    const form = e.target;
-
     const formData = new FormData();
     formData.append('title', input_title.value);
     formData.append('date', (input_date.value).toString());
@@ -71,21 +71,23 @@ const submitData = async (e) => {
     formData.append('eventImage', input_image.files[0]);
     formData.append('smallDesc', input_smallDesc.value);
     formData.append('fullDesc', input_fullDesc.value);
+    formData.append('author', author);
 
     try {
-        const res = await axios.post('/admin/event', formData, {
+        const res = await axios.patch(`/admin/event/${url}`, formData, {
             headers: {
                 'content-type': 'multipart/form-data',
                 'authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });
-        if (res.status !== 201) {
+        console.log(res);
+        if (res.status != 200) {
             throw Error(res);
         }
         alertDiv.innerHTML = res.data.msg;
         alertDiv.classList.remove('message');
         alertDiv.classList.add('success');
-        form.reset();
+        populate();
     } catch (err) {
         alertDiv.innerHTML = err.response.data.msg;
         alertDiv.classList.remove('message');

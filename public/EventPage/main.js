@@ -1,5 +1,5 @@
 const user = document.querySelector('.user');
-const postEvent = document.querySelector('.postEvent');
+const postEvent = document.querySelectorAll('.postEvent');
 const eventContent = document.querySelector('.container');
 
 const container = document.querySelector('.container-full');
@@ -9,6 +9,7 @@ const commentPost = document.getElementById('comment-post');
 const commentValue = commentPost.querySelector('input');
 const submitButton = commentPost.querySelector('button');
 const deleteButton = document.getElementById('delete');
+const role = localStorage.getItem('role');
 let calendar = '';
 let id = '';
 
@@ -16,9 +17,9 @@ const url = window.location.search.split('=')[1];
 
 const setUser = () => {
     const username = localStorage.getItem('user');
-    const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
-    postEvent.style.display = (role == 'admin') ? 'block' : 'none';
+    deleteButton.style.display = (role == 'admin') ? 'block' : 'none';
+    postEvent.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
 }
 
 const getHTML = async (eventData) => {
@@ -37,6 +38,7 @@ const getHTML = async (eventData) => {
     } = eventData;
     calendar = calendarID;
     const imageData = image.split('./public')[1];
+    const editURL = `<a href="../updateEvent/index.html?id=${url}" style="cursor: hover; color: rgba(0, 0, 255, 1);">click to edit</a>`;
     return `
     <div class="sub-container" id="${calendarID}">
         <div class="content-page">
@@ -48,7 +50,7 @@ const getHTML = async (eventData) => {
                 <p>ends at: ${toTime}</p>
                 <p>${smallDesc}</p>
                 <p>${club == 'ALL' ? 'open to all' : 'by ' + club}</p>
-                <a href="../updateEvent/index.html?id=${url}" style="cursor: hover; color: rgba(0, 0, 255, 1);">click to edit</a> 
+                ${(role == 'admin')? editURL: ''}
                 </div>
         </div>
         <img src="..${imageData}" alt="imageData">

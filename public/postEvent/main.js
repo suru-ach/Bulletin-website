@@ -1,4 +1,5 @@
 const alertDiv = document.querySelector('.alertDiv');
+const postEventrole = document.querySelectorAll('.postEvent');
 const postEvent = document.getElementById('postEvent');
 const user = document.querySelector('.user');
 const submitButton = postEvent.querySelector('button');
@@ -7,7 +8,7 @@ const setUser = () => {
     const username = localStorage.getItem('user');
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
-    postEvent.style.display = (role == 'admin') ? 'block' : 'none';
+    postEventrole.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
 }
 
 const submitData = async (e) => {
