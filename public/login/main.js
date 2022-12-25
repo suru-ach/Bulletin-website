@@ -4,7 +4,7 @@ const register = document.querySelector('.register');
 const input_email = document.getElementById('email');
 const input_password = document.getElementById('password');
 const postEvent = document.querySelectorAll('.postEvent');
-const logout = document.getElementById('logout');
+const userModal = document.querySelector('.user-float');
 
 const alertDiv = document.querySelector('.alertDiv');
 
@@ -19,19 +19,25 @@ const setUser = () => {
     const username = localStorage.getItem('user');
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
-    logout.style.display = (role) ? 'block' : 'none';
     postEvent.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
+    userModal.innerHTML = `<p>logged in as</p><p>${username || 'guest'}</p>${(role == 'admin' ? '<button class="logout" onClick=deleteUser()>logout</button>' : '' )}`;
 }
+
+const deleteUser = () => {
+    localStorage.clear();
+    setUser();
+}
+
 
 const submitData = async (e) => {
     e.preventDefault();
-
+    
     alertDiv.innerHTML = 'loading';
     alertDiv.classList.add('message');
-
+    
     const email = input_email.value;
     const password = input_password.value;
-
+    
     try {
         const res = await axios.post('/user/login', { email, password });
         if (res.msg !== undefined) {
@@ -48,7 +54,7 @@ const submitData = async (e) => {
         alertDiv.classList.remove('message');
         alertDiv.classList.add('error');
     }
-
+    
     setTimeout(() => {
         alertDiv.classList.remove('error');
         alertDiv.classList.remove('success');
@@ -57,10 +63,8 @@ const submitData = async (e) => {
 setUser();
 
 register.addEventListener('submit', (e) => submitData(e));
-logout.addEventListener('click', () => {
-    localStorage.clear();
-    setUser();
-});
+user.addEventListener('click', () => userModal.classList.toggle('modal-view'));
+window.addEventListener('scroll', () => userModal.classList.add('modal-view'));
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

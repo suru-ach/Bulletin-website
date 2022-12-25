@@ -1,5 +1,6 @@
 const user = document.querySelector('.user');
 const postEvent = document.querySelectorAll('.postEvent');
+const userModal = document.querySelector('.user-float');
 
 const alertDiv = document.querySelector('.alertDiv');
 
@@ -15,6 +16,12 @@ const setUser = () => {
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
     postEvent.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
+    userModal.innerHTML = `<p>logged in as</p><p>${username || 'guest'}</p>${(role == 'admin' ? '<button class="logout" onClick=deleteUser()>logout</button>' : '' )}`;
+}
+
+const deleteUser = () => {
+    localStorage.clear();
+    setUser();
 }
 
 const register = document.querySelector('.register');
@@ -26,10 +33,10 @@ const input_password = document.getElementById('password');
 
 const submitData = async (e) => {
     e.preventDefault();
-
+    
     alertDiv.innerHTML = 'loading';
     alertDiv.classList.add('message');
-
+    
     const user = input_user.value;
     const email = input_email.value;
     const password = input_password.value;
@@ -54,7 +61,7 @@ const submitData = async (e) => {
     input_user.value = '';
     input_email.value = '';
     input_password.value = '';
-
+    
     setTimeout(() => {
         alertDiv.classList.remove('error');
         alertDiv.classList.remove('success');
@@ -62,6 +69,8 @@ const submitData = async (e) => {
 }
 setUser();
 
+user.addEventListener('click', () => userModal.classList.toggle('modal-view'));
+window.addEventListener('scroll', () => userModal.classList.add('modal-view'));
 register.addEventListener('submit', (e) => submitData(e));
 
 function openNav() {

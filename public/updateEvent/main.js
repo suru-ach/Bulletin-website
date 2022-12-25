@@ -3,6 +3,7 @@ const postEventrole = document.querySelectorAll('.postEvent');
 const postEvent = document.getElementById('postEvent');
 const user = document.querySelector('.user');
 const submitButton = postEvent.querySelector('button');
+const userModal = document.querySelector('.user-float');
 
 const url = window.location.search.split('=')[1];
 
@@ -21,7 +22,13 @@ const setUser = () => {
     const username = localStorage.getItem('user');
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
-    postEventrole.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
+    postEvent.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
+    userModal.innerHTML = `<p>logged in as</p><p>${username || 'guest'}</p>${(role == 'admin' ? '<button class="logout" onClick=deleteUser()>logout</button>' : '' )}`;
+}
+
+const deleteUser = () => {
+    localStorage.clear();
+    setUser();
 }
 
 const populate = async() => {
@@ -42,7 +49,7 @@ const populate = async() => {
     }
     let date = new Date(res.data.date);
     date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
-
+    
     input_title.value = res.data.title;
     input_date.value = date;
     input_fromTime.value = res.data.fromTime;
@@ -60,7 +67,7 @@ const submitData = async (e) => {
     
     alertDiv.innerHTML = 'saving';
     alertDiv.classList.add('message');
-
+    
     const formData = new FormData();
     formData.append('title', input_title.value);
     formData.append('date', (input_date.value).toString());
@@ -72,7 +79,7 @@ const submitData = async (e) => {
     formData.append('smallDesc', input_smallDesc.value);
     formData.append('fullDesc', input_fullDesc.value);
     formData.append('author', author);
-
+    
     try {
         const res = await axios.patch(`/admin/event/${url}`, formData, {
             headers: {
@@ -80,7 +87,6 @@ const submitData = async (e) => {
                 'authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });
-        console.log(res);
         if (res.status != 200) {
             throw Error(res);
         }
@@ -93,7 +99,7 @@ const submitData = async (e) => {
         alertDiv.classList.remove('message');
         alertDiv.classList.add('error');
     }
-
+    
     setTimeout(() => {
         alertDiv.classList.remove('error');
         alertDiv.classList.remove('success');
@@ -103,6 +109,8 @@ const submitData = async (e) => {
 setUser();
 populate();
 
+user.addEventListener('click', () => userModal.classList.toggle('modal-view'));
+window.addEventListener('scroll', () => userModal.classList.add('modal-view'));
 postEvent.addEventListener('submit', (e) => submitData(e));
 
 

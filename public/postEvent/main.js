@@ -3,12 +3,19 @@ const postEventrole = document.querySelectorAll('.postEvent');
 const postEvent = document.getElementById('postEvent');
 const user = document.querySelector('.user');
 const submitButton = postEvent.querySelector('button');
+const userModal = document.querySelector('.user-float');
 
 const setUser = () => {
     const username = localStorage.getItem('user');
     const role = localStorage.getItem('role');
     user.innerHTML = username || 'guest';
-    postEventrole.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
+    postEvent.forEach(event => event.style.display = (role == 'admin') ? 'block' : 'none');
+    userModal.innerHTML = `<p>logged in as</p><p>${username || 'guest'}</p>${(role == 'admin' ? '<button class="logout" onClick=deleteUser()>logout</button>' : '' )}`;
+}
+
+const deleteUser = () => {
+    localStorage.clear();
+    setUser();
 }
 
 const submitData = async (e) => {
@@ -28,8 +35,8 @@ const submitData = async (e) => {
     const input_fullDesc = document.getElementById('fullDesc');
     const input_image = document.getElementById('eventImage');
     const form = e.target;
-
-
+    
+    
     const formData = new FormData();
     formData.append('title', input_title.value);
     formData.append('date', (input_date.value).toString());
@@ -40,7 +47,7 @@ const submitData = async (e) => {
     formData.append('eventImage', input_image.files[0]);
     formData.append('smallDesc', input_smallDesc.value);
     formData.append('fullDesc', input_fullDesc.value);
-
+    
     try {
         const res = await axios.post('/admin/event', formData, {
             headers: {
@@ -60,7 +67,7 @@ const submitData = async (e) => {
         alertDiv.classList.remove('message');
         alertDiv.classList.add('error');
     }
-
+    
     setTimeout(() => {
         alertDiv.classList.remove('error');
         alertDiv.classList.remove('success');
@@ -69,6 +76,8 @@ const submitData = async (e) => {
 }
 setUser();
 
+user.addEventListener('click', () => userModal.classList.toggle('modal-view'));
+window.addEventListener('scroll', () => userModal.classList.add('modal-view'));
 postEvent.addEventListener('submit', (e) => submitData(e));
 
 
