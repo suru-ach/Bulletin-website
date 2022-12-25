@@ -22,7 +22,11 @@ const sortByClubs = async (e) => {
     console.log(e.target.value);
     const { value } = e.target;
     if(value == 'all') {
-        return getContent('/event');
+        events.innerHTML = '<div style="font-size: 30px; background-color: white;">Loading...</div>';
+        const sortedData = sortByDate(contextData);
+        const eventsHTML = createHTML(sortedData);
+        events.innerHTML = eventsHTML;
+        return;
     }
     events.innerHTML = '<div style="font-size: 30px; background-color: white;">Loading...</div>';
     const sortedData = sortByDate(contextData);
