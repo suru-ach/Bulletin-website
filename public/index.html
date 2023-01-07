@@ -4,51 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <title>EventPage</title>
+    <link rel="stylesheet" href="./output.css">
+    <title>FrontPage</title>
 </head>
 <body>
-    <div class="topnav mainnav">
-        <a class="active" href="#">Events</a>
-        <a href="./login/index.html">Login</a>
-        <a href="./register/index.html">Sign-up</a>
-        <a href="./CalendarPage/index.html">Calendar</a>
-        <a href="./postEvent/index.html" class="postEvent" style="display: none;">PostEvent</a>
-        <a>
-            <select name="clubs" id="club" value="all">
-            </select>
-        </a>
-        <div class="user" style="float: right;">
-            <p>guest</p>
-        </div>
-        <span class="user-float modal-view">
-        </span>
-    </div>
+  <div class="w-screen bg-white shadow-lg flex p-3 md:justify-between">
     
-    <div class="topnav menuham">
-        <div id="mySidenav" class="sidenav links">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#">Events</a>
-            <a href="./login/index.html">Login</a>
-            <a href="./register/index.html">Sign-up</a>
-            <a href="./CalendarPage/index.html">Calendar</a>
-            <a href="./postEvent/index.html" class="postEvent" style="display: none;">PostEvent</a>
-            <div class="sm-user"></div>
-        </div>
-        
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">
-            <p>&#9776; Menu</p>
-        </span>
+    <img class="w-8 cursor-pointer md:hidden" src="./menu-icon.png" alt="menu">
+    <a class="mx-auto flex w-8 space-x-2 justify-center items-center cursor-pointer md:mx-8" href="#">
+      <img src="./home-icon.png" alt="home">
+      <p>bulletin</p>
+    </a>
+
+    <ul class="hidden md:flex self-center text-lg">
+      <li><a href="" class="py-[1rem] px-3 hover:bg-slate-400 transition-colors duration-300">post</a></li>
+      <li><a href="" class="py-[1rem] px-3 hover:bg-slate-400 transition-colors duration-300">profile</a></li>
+      <li><a href="" class="py-[1rem] px-3 hover:bg-slate-400 transition-colors duration-300">calendar</a></li>
+      <li><a href="" class="py-[1rem] px-3 hover:bg-slate-400 transition-colors duration-300">login/register</a></li>
+      <li><a href="" class="py-[1rem] px-3 hover:bg-slate-400 transition-colors duration-300">about us</a></li>
+    </ul>
+
+    <div class="w-8 cursor-pointer">
+      <img class="rounded-full" src="./uploads/profile/default.png" alt="">
     </div>
-    <div class="container">
-        <h1 class="event-h">EVENTS</h1>
-        <div class="events">
-        </div>
-    </div>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init();</script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./main.js"></script>
+
+
+  </div>
+  <!-- <iframe src="https://calendar.google.com/calendar/embed?src=12dbf026c51e4f00ba7b4f099dc29b225c78bde7d500347bf8025edcfba3a302%40group.calendar.google.com&ctz=Asia%2FKolkata" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
 </body>
 </html>
