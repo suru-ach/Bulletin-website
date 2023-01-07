@@ -1,57 +1,65 @@
-const { createCustomError } = require('../errors/customErrorAPI');
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+const { createCustomeError } = require("../errors/customError");
 
-const authUser = (req, res, next) => {
-    const authenticationHeader = req.headers.authorization;
-    if(!authenticationHeader || !authenticationHeader.startsWith('Bearer ')) {
-        return next(createCustomError('unauthorized, no token', 401));
+
+const adminAuth = async(req, res, next) => {
+    const authHeader = req.headers.authorization;
+    
+    if(!authHeader || !authHeader.startsWith("Bearer ")) {
+        return next(createCustomeError(403, 'not authorized'));
     }
-    const token = authenticationHeader.split(' ')[1];
-    // validate the token, through this middleware for users
+    
+    const token = authHeader.split(" ")[1];
+    
     try {
         const payload = jwt.verify(token, process.env.JWT_KEY);
-        const { userId, username, role, clubs } = payload;
-        req.user = { userId, username, role, clubs };
+        if(payload.role != 'admin') {
+            return next(createCustomeError(403, 'not authorized'));
+        }
+        req.user = payload;
         next();
-        
     } catch(err) {
-        return next(createCustomError('unauthorized, token invalid', 401));
+        return next(createCustomeError(403, 'not authorized'));
     }
 };
 
-const authAdmin = (req, res, next) => {
-    const authenticationHeader = req.headers.authorization;
-    if(!authenticationHeader || !authenticationHeader.startsWith('Bearer ')) {
-        return next(createCustomError('unauthorized, no token', 401));
+const userAuth = async(req, res, next) => {
+    const authHeader = req.headers.authorization;
+    
+    if(!authHeader || !authHeader.startsWith("Bearer ")) {
+        return next(createCustomeError(403, 'not authorized'));
     }
-    const token = authenticationHeader.split(' ')[1];
-    // validate the token, through this middleware only for admins
+    
+    const token = authHeader.split(" ")[1];
+    
     try {
         const payload = jwt.verify(token, process.env.JWT_KEY);
-        const { userId, username, role, clubs } = payload;
-        req.user = { userId, username, role, clubs };
-        // allow edit only for role ADMIN not USER
-        if(role != 'admin') {
-            return next(createCustomError('unauthorized, not admin', 401));
-        }
+        req.user = payload;
         next();
     } catch(err) {
-        return next(createCustomError('unauthorized, token invalid', 401));
+        return next(createCustomeError(403, 'not authorized'));
     }
 };
 
-const authAuthor = (req, res, next) => {
-
-    // this middleware checks if the author is the one making the change
-    const isAuthor = req.user.userId === req.body.author;
-    try { 
-        if(!isAuthor) {
-            return next(createCustomError('not the author', 401));
+const authorAuth = async(req, res, next) => {
+    const authHeader = req.headers.authorization;
+    
+    if(!authHeader || !authHeader.startsWith("Bearer ")) {
+        return next(createCustomeError(403, 'not authorized'));
+    }
+    
+    const token = authHeader.split(" ")[1];
+    
+    try {
+        const payload = jwt.verify(token, process.env.JWT_KEY);
+        if(payload.id != req.body.author) {
+            return next(createCustomeError(403, 'not authorized'));
         }
+        req.user = payload;
         next();
     } catch(err) {
-        return next(createCustomError('bad request', 401));
+        return next(createCustomeError(403, 'not authorized'));
     }
-}
+};
 
-module.exports = { authUser, authAdmin, authAuthor };
+module.exports = { adminAuth, userAuth, authorAuth };

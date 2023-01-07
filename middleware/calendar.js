@@ -1,11 +1,9 @@
-// configuration 
 const { google } = require('googleapis');
 const { createCustomError } = require('../errors/customErrorAPI');
 const { async_function } = require('./async_function');
+
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 const calendarId = process.env.CALENDAR_ID;
-
-// google_calendar_API
 const calendar = google.calendar({ version: "v3" });
 
 const auth = new google.auth.JWT(
@@ -34,7 +32,6 @@ const insertCalendar = async_function(async (req, res, next) => {
         }
     };
 
-    // insert event to calendar
     const insertEvent = async (event) => {
         try {
             let response = await calendar.events.insert({
@@ -58,7 +55,7 @@ const insertCalendar = async_function(async (req, res, next) => {
             req.calendarID = res;
         })
         .catch((err) => {
-            return next(createCustomError('could not access calendar', 403));
+            return next(createCustomError(403, 'could not access calendar'));
         });
         next();
     });
@@ -66,7 +63,6 @@ const insertCalendar = async_function(async (req, res, next) => {
 const deleteCalendar = async_function((req, res, next) => {
     const { calendarID } = req.query;
 
-    // delete event in calendar
     const deleteEvent = async (event_id) => {
         
         try {
@@ -91,7 +87,7 @@ const deleteCalendar = async_function((req, res, next) => {
             req.body.msg = 'delete success';
         })
         .catch((err) => {
-            return next(createCustomError('could not access calendar', 403));
+            return next(createCustomError(403, 'could not access calendar'));
         });
 
     next();

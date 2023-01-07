@@ -1,10 +1,11 @@
-const { CustomError } = require('../errors/customErrorAPI');
-// custom error handled here
+const { CustomeErrorAPI } = require("../errors/customError")
+
 const errorMiddleware = (err, req, res, next) => {
-    if(err instanceof CustomError) {
-        return res.status(err.statusCode).json({msg: err.message});
+    if(err instanceof CustomeErrorAPI) {
+        return res.status(err.statusCode).json({message: err.message});
     }
-    return res.status(500).json({msg: 'something went wrong, error: 500, internal error'});
-};
+    console.log(err);
+    return res.status(500).json({message: 'internal error'});
+}
 
 module.exports = errorMiddleware;

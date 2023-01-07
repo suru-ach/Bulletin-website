@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// events model
 const EventModel = new mongoose.Schema({
     title: {
         type: String,
@@ -9,7 +8,7 @@ const EventModel = new mongoose.Schema({
     },
     date: {
         type: Date,
-        required: true
+        // required: true
     },
     fromTime: {
         type: String,
@@ -25,6 +24,7 @@ const EventModel = new mongoose.Schema({
     },
     club: {
         type: String,
+        default: 'general'
     },
     image: {  
         type: String,
@@ -32,7 +32,7 @@ const EventModel = new mongoose.Schema({
     smallDesc: {
         type: String,
         required: true,
-        maxlength: 100,
+        maxlength: [100, 'minimum length 100'],
     },
     fullDesc: {
         type: String,
@@ -48,9 +48,11 @@ const EventModel = new mongoose.Schema({
     },
     comments: [{
         user: String,
+        userProfile: String,
         userId: String,
         comment: {
-            type: String
+            type: String,
+            required: [true, 'comment cannot be empty']
         }
     }]
 }, {timestamps: true});
