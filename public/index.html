@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./output.css">
-    <title>FrontPage</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./output.css">
+  <title>FrontPage</title>
 </head>
+
 <body>
   <div class="w-screen bg-white shadow-lg flex p-3 md:justify-between">
-    
-    <img class="w-8 cursor-pointer md:hidden" src="./menu-icon.png" alt="menu">
+
+    <img id="menu-open" class="w-8 cursor-pointer md:hidden" src="./icons/menu-icon.png" alt="menu">
     <a class="mx-auto flex w-8 space-x-2 justify-center items-center cursor-pointer md:mx-8" href="#">
-      <img src="./home-icon.png" alt="home">
+      <img src="./icons/home-icon.png" alt="home">
       <p>bulletin</p>
     </a>
 
@@ -20,23 +22,35 @@
       <li><a href="" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">post</a></li>
       <li><a href="" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">profile</a></li>
       <li><a href="" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">calendar</a></li>
-      <li><a href="" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">login/register</a></li>
-      <li><a href="" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">about us</a></li>
+      <li><a href="./pages/login.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">login/register</a></li>
     </ul>
-    
+
     <div class="w-8 cursor-pointer">
       <img class="rounded-full" src="./uploads/profile/default.png" alt="">
     </div>
-    
-    <div class="absolute bg-black w-full h-screen inset-0 flex flex-col hidden">
-        <img class="w-8 rounded-sm m-3 bg-white cursor-pointer" src="./close-icon.png" alt="close">
-        <a href="" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">post</a>
-        <a href="" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">profile</a>
-        <a href="" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">calendar</a>
-        <a href="" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">login/register</a>
-        <a href="" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">about us</a>
+
+
+    <div id="menu" class="absolute bg-black w-full h-screen flex flex-col inset-0 -left-full transition-all duration-700">
+      <img id="menu-close" class="w-8 rounded-[5px] m-3 bg-white cursor-pointer" src="./icons/close-icon.png" alt="close">
+      <a href="" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">post</a>
+      <a href="" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">profile</a>
+      <a href="" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">calendar</a>
+      <a href="./pages/login.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">login/register</a>
     </div>
 
   </div>
+  <script>
+    const menu = document.getElementById('menu');
+    const menuClose = document.getElementById('menu-close');
+    const menuOpen = document.getElementById('menu-open');
+
+    menuOpen.addEventListener('click', () => {
+      menu.classList.remove('-left-full');
+    });
+    menuClose.addEventListener('click', () => {
+      menu.classList.add('-left-full');
+    });
+  </script>
 </body>
+
 </html>

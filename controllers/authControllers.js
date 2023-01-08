@@ -19,8 +19,14 @@ const register = asyncWrapper(async(req, res, next) => {
     req.body.password = await getHash(req.body.password);
     
     const newUser = await User.create(req.body);
+    const token = await newUser.createJWT();
+    const user = {
+        username: newUser.username,
+        profile: newUser.profileImage,
+        role: user.role
+    }
     
-    return res.status(200).json({message: "success", payload: newUser});
+    return res.status(200).json({message: "success", payload: {token, ...user}});
 });
 
 const login = asyncWrapper(async(req, res, next) => {
@@ -40,7 +46,12 @@ const login = asyncWrapper(async(req, res, next) => {
     }
     
     const token = user.createJWT();
-    res.status(200).json({message: "success", payload: token});
+    const userData = {
+        username: user.username,
+        profile: user.profileImage,
+        role: user.role
+    }
+    res.status(200).json({message: "success", payload: {token, ...userData}});
 });
 
 const updateUser = asyncWrapper(async(req, res, next) => {    
