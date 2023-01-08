@@ -23,7 +23,7 @@ const register = asyncWrapper(async(req, res, next) => {
     const user = {
         username: newUser.username,
         profile: newUser.profileImage,
-        role: user.role
+        role: newUser.role
     }
     
     return res.status(200).json({message: "success", payload: {token, ...user}});
