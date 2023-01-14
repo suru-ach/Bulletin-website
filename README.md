@@ -17,7 +17,7 @@ There is an admin interface for posting events and updating/deleting the events 
 For development, you will only need Node.js.  
 Does not have a documentation yet!
   
-###  Instal
+###  Install
  
 $ git clone https://github.com/suru-ach/Bulletin-website.git
 
