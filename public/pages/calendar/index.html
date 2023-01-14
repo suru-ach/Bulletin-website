@@ -13,83 +13,53 @@
     <div class="w-screen bg-white shadow-lg flex p-3 md:justify-between">
 
         <img id="menu-open" class="w-8 cursor-pointer md:hidden" src="../../icons/menu-icon.png" alt="menu">
-        <a class="mx-auto flex w-8 space-x-2 justify-center items-center cursor-pointer md:mx-8" href="../../index.html">
+        <a class="mx-auto flex w-8 space-x-2 justify-center items-center cursor-pointer md:mx-8"
+            href="../../index.html">
             <img src="../../icons/home-icon.png" alt="home">
             <p>bulletin</p>
         </a>
 
         <ul class="hidden md:flex self-center text-lg">
-            <li><a href="../../pages/post/index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300 hidden post-link">post</a></li>
-            <li><a href="../../pages/profile/index.html#logout" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">profile</a></li>
-            <li><a href="../../pages/calendar/index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">calendar</a></li>
-            <li><a href="../../pages/login/index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">login/register</a></li>
+            <li><a href="../../pages/post/index.html"
+                    class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300 hidden post-link">post</a>
+            </li>
+            <li><a href="../../pages/profile/index.html#logout"
+                    class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">profile</a></li>
+            <li><a href="../../pages/calendar/index.html"
+                    class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">calendar</a></li>
+            <li><a href="../../pages/login/index.html"
+                    class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">login/register</a></li>
         </ul>
 
         <div class="w-8 cursor-pointer" id="profile-box">
-            <img id="profile-menu" class="aspect-square object-cover rounded-full" src="../../uploads/profile/default.png" alt="">
-            <div id="profile-view" class="bg-white w-48 h-[284px] border-2 rounded-md z-50 absolute top-[62px] right-1 p-2 hidden flex-col items-center justify-evenly"></div>
+            <img id="profile-menu" class="aspect-square object-cover rounded-full"
+                src="../../uploads/profile/default.png" alt="">
+            <div id="profile-view"
+                class="bg-white w-48 h-[284px] border-2 rounded-md z-50 absolute top-[62px] right-1 p-2 hidden flex-col items-center justify-evenly">
+            </div>
         </div>
 
 
-        <div id="menu" class="absolute bg-black w-full h-screen flex flex-col inset-0 -left-full transition-all duration-700">
-            <img id="menu-close" class="w-8 rounded-[5px] m-3 bg-white cursor-pointer" src="../../icons/close-icon.png" alt="close">
-            <a href="../../pages/post/index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300 hidden post-link">post</a>
-            <a href="../../pages/profile/index.html#logout" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">profile</a>
-            <a href="../../pages/calendar/index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">calendar</a>
-            <a href="../../pages/login/index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">login/register</a>
+        <div id="menu"
+            class="absolute bg-black w-full h-screen flex flex-col inset-0 -left-full transition-all duration-700">
+            <img id="menu-close" class="w-8 rounded-[5px] m-3 bg-white cursor-pointer" src="../../icons/close-icon.png"
+                alt="close">
+            <a href="../../pages/post/index.html"
+                class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300 hidden post-link">post</a>
+            <a href="../../pages/profile/index.html#logout"
+                class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">profile</a>
+            <a href="../../pages/calendar/index.html"
+                class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">calendar</a>
+            <a href="../../pages/login/index.html"
+                class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">login/register</a>
         </div>
     </div>
     <div class="mt-12 flex justify-center items-center">
-        <iframe src="https://calendar.google.com/calendar/embed?src=12dbf026c51e4f00ba7b4f099dc29b225c78bde7d500347bf8025edcfba3a302%40group.calendar.google.com&ctz=Asia%2FKolkata" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        <iframe
+            src="https://calendar.google.com/calendar/embed?src=12dbf026c51e4f00ba7b4f099dc29b225c78bde7d500347bf8025edcfba3a302%40group.calendar.google.com&ctz=Asia%2FKolkata"
+            style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
-    <script>
-        const menu = document.getElementById('menu');
-        const menuClose = document.getElementById('menu-close');
-        const menuOpen = document.getElementById('menu-open');
-        const profileMenu = document.getElementById('profile-menu');
-        const profileToggle = document.getElementById('profile-view');
-        const postLinks = Array.from(document.querySelectorAll('.post-link'));
-
-        const setUser = () => {
-            const role = localStorage.getItem('role');
-            const profile = localStorage.getItem('profile') ? '../..'+localStorage.getItem('profile').split('/public')[1] : '../../uploads/profile/default.png';
-            const username = localStorage.getItem('username');
-            if (role == 'admin') {
-                postLinks.forEach(link => link.classList.remove('hidden'))
-            }
-
-            if (profile) {
-                profileMenu.src = profile;
-            }
-            const html = `
-               <div class="p-7">
-                 <img class="aspect-square object-cover rounded-full" id="profile" src="${profile ? profile : '../../uploads/profile/default.png'}" alt="profile">
-               </div>
-               <p class="mb-2">${username ? username : 'guest'}</p>
-               ${role ? `<p class="mb-2">role: ${role}</p>` : ''}
-               <div class="mb-2 ${role != undefined ? '': 'hidden'}">
-                 <a href="../../pages/profile/index.html#logout" class="bg-blue-500 px-3 py-1 rounded-md text-white">edit</a>
-                 <a href="../../pages/profile/index.html#logout" class="bg-black px-3 py-1 rounded-md text-white">logout</a>
-               </div>
-            `;
-            profileToggle.innerHTML = html;
-        }
-
-        menuOpen.addEventListener('click', () => {
-            menu.classList.remove('-left-full');
-        });
-        menuClose.addEventListener('click', () => {
-            menu.classList.add('-left-full');
-        });
-        profileMenu.addEventListener('click', () => {
-            if (profileToggle.classList.contains('hidden')) {
-                profileToggle.classList.replace('hidden', 'flex');
-            } else {
-                profileToggle.classList.replace('flex', 'hidden');
-            }
-        });
-        setUser();
-    </script>
+    <script src="./main.js"></script>
 </body>
 
 </html>
