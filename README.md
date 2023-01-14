@@ -32,6 +32,6 @@ Make sure you have node installed
 $ node app
 
 #### Our Team
-frontend and design: Navyashree, Shishir, Gahana, Gehena, Dileep, Roshan, Anagha, Srujan</br>
-content: Navyashree, Shishir, Gahana, Gehena, Dileep, Roshan, Anagha, Srujan</br>
+frontend and design: Amar, Navyashree, Shishir, Gahana, Gehena, Dileep, Roshan, Anagha, Srujan</br>
+content: Amar, Navyashree, Shishir, Gahana, Gehena, Dileep, Roshan, Anagha, Srujan</br>
 backend: Srujan</br>
