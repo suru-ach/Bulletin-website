@@ -41,7 +41,7 @@
     </div>
 
     <div id="contents" class="w-full h-auto flex py-3 flex-wrap justify-evenly">
-        <p class="text-left text-4xl my-12">Post Event</p>
+        <p class="text-left text-4xl my-12">Update Event</p>
         <form id="form" class="flex flex-col space-y-5 p-5 w-[95%] bg-white">
             <p id="message-box" class="fixed rounded-md top-1/2 right-1/2 w-auto text-white font-bold tracking-wider bg-sky-400 px-5 py-4 translate-x-1/2 -translate-y-1/2 border-rose-50 border-2 hidden"></p>
             <div class="flex flex-col my-3 space-y-2">
@@ -72,6 +72,7 @@
                 <label for="fullDesc">Full Description</label> <input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="text" placeholder="Full descriptiion" id="fullDesc" required><br>
             </div>
             <button type="submit" id="submit" value="submit" class="p-3 w-24 bg-sky-500 text-white rounded-md self-center">submit</button>
+            <button id="delete" class="p-3 w-24 bg-red-500 text-white rounded-md self-center">delete</button>
         </form>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -83,8 +84,11 @@
         const profileToggle = document.getElementById('profile-view');
         const postLinks = Array.from(document.querySelectorAll('.post-link'));
         const contents = document.getElementById('contents');
+
+        const urlId = window.location.search.split('=')[1];
         
         const submit = document.getElementById('submit');
+        const deleteButton = document.getElementById('delete');
         const form = document.getElementById('form');
         const message = document.getElementById('message-box');
 
@@ -112,7 +116,58 @@
             `;
             profileToggle.innerHTML = html;
         }
+
+        const payload = async() => {
+            try {
+                const res = await axios.get(`/events/${urlId}`);
+                return res.data.payload;
+            } catch(err) {
+                contents.innerHTML = ('<div>500 internal error, ;\\. please come back later</div>');
+                return null;
+            }
+        }
+
+        const input_title = document.getElementById('title');
+        const input_date = document.getElementById('date');
+        const input_fromTime = document.getElementById('fromTime');
+        const input_toTime = document.getElementById('toTime');
+        const input_venue = document.getElementById('venue');
+        const input_club = document.getElementById('club');
+        const input_smallDesc = document.getElementById('smallDesc');
+        const input_fullDesc = document.getElementById('fullDesc');
+        const input_image = document.getElementById('postImage');
+        let calendarID_g;
         
+        const populate = async() => {
+            const data = await payload();
+            if(!data) {
+                return;
+            }
+        
+            const {
+            title,
+            date,
+            fromTime,
+            toTime,
+            venue,
+            club,
+            smallDesc,
+            fullDesc,
+            calendarID,
+            } = data;
+            
+            input_title.value = title;
+            input_date.value = date.slice(0,10);
+            input_club.value = club;
+            input_fromTime.value = fromTime;
+            input_toTime.value = toTime;
+            input_venue.value = venue;
+            input_smallDesc.value = smallDesc;
+            input_fullDesc.value = fullDesc;
+            calendarID_g = calendarID;
+        };
+        populate();
+
         const postData = async(e) => {
             e.preventDefault();
             message.innerHTML = 'posting';
@@ -121,17 +176,7 @@
             submit.classList.add('cursor-not-allowed');
             submit.disabled = true;
 
-            const input_title = document.getElementById('title');
-            const input_date = document.getElementById('date');
-            const input_fromTime = document.getElementById('fromTime');
-            const input_toTime = document.getElementById('toTime');
-            const input_venue = document.getElementById('venue');
-            const input_club = document.getElementById('club');
-            const input_smallDesc = document.getElementById('smallDesc');
-            const input_fullDesc = document.getElementById('fullDesc');
-            const input_image = document.getElementById('postImage');
             const form = e.target;
-
 
             const formData = new FormData();
             formData.append('title', input_title.value);
@@ -143,9 +188,10 @@
             formData.append('imagePost', input_image.files[0]);
             formData.append('smallDesc', input_smallDesc.value);
             formData.append('fullDesc', input_fullDesc.value);
+            formData.append('author', localStorage.getItem('id'));
 
             try {
-                const res = await axios.post('/events', formData, {
+                const res = await axios.patch(`/events/${urlId}?calendarID=${calendarID_g}`, formData, {
                     headers: {
                         'Content-type': 'multipart/form-data',
                         'authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -168,6 +214,40 @@
             form.reset();
         };
         
+        const deleteData = async(e) => {
+            e.preventDefault();
+            message.innerHTML = 'posting';
+            message.classList.remove('hidden');
+            message.classList.add('block');
+            deleteButton.classList.add('cursor-not-allowed');
+            deleteButton.disabled = true;
+
+            try {
+                const res = await axios.delete(`/events/${urlId}?calendarID=${calendarID_g}`, {
+                    headers: {
+                        'authorization': `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    data: {
+                        author: localStorage.getItem('id')
+                    }
+                });
+                message.style.backgroundColor = 'rgb(34 197 94)';
+                message.innerHTML = res.data.message;
+            } catch(err) {
+                message.style.backgroundColor = 'rgb(220 38 38)';
+                message.innerHTML = err.response.data.message;
+            }
+
+            deleteButton.disabled = false;
+            deleteButton.classList.remove('cursor-not-allowed');
+            setTimeout(() => {
+                message.classList.remove('block');
+                message.classList.add('hidden');
+                window.location.href = "../../index.html";
+            }, 2000);
+        };
+
+        deleteButton.addEventListener('click', (e) => deleteData(e));
         form.addEventListener('submit', e => postData(e))
         
         menuOpen.addEventListener('click', () => {

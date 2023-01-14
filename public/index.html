@@ -63,6 +63,8 @@
         
         const populatePage = (data) => {
             if(data == null || data.length == 0){ 
+                banner.classList.remove('flex');
+                banner.classList.add('hidden');
                 contents.innerHTML = "<div class='text-4xl'>Nothing's up</div>";
             } else {
                 const html = data.map(({club,
@@ -114,7 +116,10 @@
                 fillClubs(getClubs(filterData));
                 populatePage(filterData);
             } catch(err) {
-                contents.innerHTML = ('<div>500 internal error, ;\\. please come back later</div>');
+                // not ok
+                contents.innerHTML = "<div class='text-4xl'>Nothing's up</div>";
+                banner.classList.remove('flex');
+                banner.classList.add('hidden');
             }
         }
 

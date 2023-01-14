@@ -112,7 +112,6 @@ const updateUser = asyncWrapper(async(req, res, next) => {
 
 const deleteUser = asyncWrapper(async(req, res, next) => {
     const { email, password } = req.body;
-    console.log(req.body);
     if(!email || !password) {
         return next(createCustomeError(400, 'email and password cannot be empty'));
     }

@@ -20,8 +20,8 @@ router.route('/events').get(getEvents).post([upload, insertCalendar, adminAuth],
 
 router.route('/events/:id')
     .get(getEvent)
-    .patch([upload, authorAuth], updateEvent)
-    .delete([upload, authorAuth], deleteEvent);
+    .patch([upload, authorAuth, deleteCalendar, insertCalendar], updateEvent)
+    .delete([upload, authorAuth, deleteCalendar], deleteEvent);
 
 router.route('/comments/:id')
     .post(userAuth, postComment)

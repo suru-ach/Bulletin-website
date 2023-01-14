@@ -32,9 +32,7 @@ const postEvent = asyncWrapper(async(req, res, next) => {
 
 const updateEvent = asyncWrapper(async(req, res, next) => {
     const { id } = req.params;
-    //😑
-    // delete calendar event
-    // create calendar event
+    req.body.calendarID = req.calendarID;
     
     const newEvent = await Event.findOneAndUpdate({id}, req.body, {
         runValidators: true,
@@ -45,9 +43,16 @@ const updateEvent = asyncWrapper(async(req, res, next) => {
 
 const deleteEvent = asyncWrapper(async(req, res, next) => {
     const { id:_id } = req.params;
+    const deleteevent = await Event.findOne({_id});
     
-    // delete calendar event
-
+    if(deleteevent.image) {
+        fs.rm(deleteevent.image, {recursive: true}, (err) => {
+            if(err) {
+                return next(err);
+            }
+        });
+    }
+    
     const deletedEvent = await Event.findOneAndDelete({_id});
     res.status(200).json({message: "success", payload: deletedEvent});
 });
