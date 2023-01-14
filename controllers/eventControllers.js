@@ -20,8 +20,11 @@ const getEvent = asyncWrapper(async(req, res, next) => {
 
 const postEvent = asyncWrapper(async(req, res, next) => {
     req.body.author = req.user.id;
-
-    // create calendar event
+    if(req.file) {
+        const { destination, filename } = req.file;
+        req.body.image = destination+'/'+filename;
+    }
+    req.body.calendarID = req.calendarID;
     
     const newEvent = await Event.create(req.body);
     res.status(201).json({message: "success", payload: newEvent});
@@ -29,7 +32,7 @@ const postEvent = asyncWrapper(async(req, res, next) => {
 
 const updateEvent = asyncWrapper(async(req, res, next) => {
     const { id } = req.params;
-
+    //😑
     // delete calendar event
     // create calendar event
     

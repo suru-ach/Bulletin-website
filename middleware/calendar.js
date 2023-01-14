@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 const { createCustomError } = require('../errors/customErrorAPI');
-const { async_function } = require('./async_function');
+const { asyncWrapper } = require('./asyncWrapper');
 
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 const calendarId = process.env.CALENDAR_ID;
@@ -13,7 +13,7 @@ const auth = new google.auth.JWT(
     'https://www.googleapis.com/auth/calendar'
 );
 
-const insertCalendar = async_function(async (req, res, next) => {
+const insertCalendar = asyncWrapper(async (req, res, next) => {
     const { title, smallDesc, date, fromTime, toTime } = req.body;
 
     const formatDate = date.toString().split('T')[0];
@@ -57,10 +57,10 @@ const insertCalendar = async_function(async (req, res, next) => {
         .catch((err) => {
             return next(createCustomError(403, 'could not access calendar'));
         });
-        next();
-    });
+    next();
+});
     
-const deleteCalendar = async_function((req, res, next) => {
+const deleteCalendar = asyncWrapper((req, res, next) => {
     const { calendarID } = req.query;
 
     const deleteEvent = async (event_id) => {

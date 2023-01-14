@@ -14,8 +14,9 @@ const {
     deleteComment
 } = require('../controllers/eventControllers');
 const { adminAuth, authorAuth, userAuth } = require('../middleware/auth');
+const { insertCalendar, deleteCalendar } = require('../middleware/calendar');
 
-router.route('/events').get(getEvents).post([upload, adminAuth], postEvent);
+router.route('/events').get(getEvents).post([upload, insertCalendar, adminAuth], postEvent);
 
 router.route('/events/:id')
     .get(getEvent)

@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="../../output.css">
     <title>Register</title>
 </head>
-<body>
-    <div class="w-screen h-screen">
+<body class="overflow-x-hidden">
+    <div class="w-screen">
         <div class="w-full h-full flex flex-col lg:flex-row lg:justify-evenly justify-start items-center sm:bg-sky-50">
 
             <div class="flex flex-col justify-center items-center p-2 space-x-2">
@@ -30,6 +30,8 @@
                         <input id="email" name="email" class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500" type="email" placeholder="enter your email" required>
                         <label for="password">password</label>
                         <input id="password" name="password" class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500" type="password" placeholder="password" required>
+                        <label for="imagePost">profile image</label>
+                        <input id="imagePost" name="imagePost" type="file" accept="image/*">
                         <p>clubs</p>
                         <fieldset id="clubs">
                           <label for="aura">aura</label>
@@ -55,6 +57,7 @@
         const username = document.getElementById('username');
         const clubs = Array.from(document.querySelectorAll('input[type="checkbox"]'));
         const submit = document.getElementById('submit');
+        const imagePost = document.getElementById('imagePost');
         const form = document.getElementById('form');
 
         const message = document.getElementById('message-box');
@@ -72,16 +75,20 @@
             submit.classList.add('cursor-not-allowed');
             submit.disabled = true;
             const inputClubs = clubs.filter(club => club.checked).map(club => club.id);
-
-            const data = { 
-                email: email.value,
-                password: password.value,
-                username: username.value,
-                clubs: inputClubs
-            };
+            
+            const formData = new FormData();
+            formData.append('email', email.value);
+            formData.append('password', password.value);
+            formData.append('username', username.value);
+            formData.append('clubs', inputClubs);
+            formData.append('imagePost', imagePost.files[0]);
 
             try {
-                const res = await axios.post('/auth/register', data);
+                const res = await axios.post('/auth/register', formData, {
+                    headers: {
+                        'Content-type': 'multipart/form-data'
+                    }
+                });
                 message.style.color = 'rgb(34 197 94)';
                 message.innerHTML = res.data.message;
                 setToken(res.data.payload);
@@ -94,6 +101,7 @@
             submit.classList.remove('cursor-not-allowed');
             setTimeout(() => {
                 message.style.visibility = 'hidden';
+                window.location.href = "../../index.html";
             }, 3000);
             form.reset();
         };

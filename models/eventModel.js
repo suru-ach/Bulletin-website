@@ -8,7 +8,7 @@ const EventModel = new mongoose.Schema({
     },
     date: {
         type: Date,
-        // required: true
+        required: true
     },
     fromTime: {
         type: String,

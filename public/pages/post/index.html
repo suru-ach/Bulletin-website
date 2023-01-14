@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../output.css">
+    <title>Post event</title>
+</head>
+
+<body class=" overflow-x-hidden bg-slate-100">
+    <div class="w-screen bg-white shadow-lg flex p-3 md:justify-between">
+
+        <img id="menu-open" class="w-8 cursor-pointer md:hidden" src="../../icons/menu-icon.png" alt="menu">
+        <a class="mx-auto flex w-8 space-x-2 justify-center items-center cursor-pointer md:mx-8" href="../../index.html">
+            <img src="../../icons/home-icon.png" alt="home">
+            <p>bulletin</p>
+        </a>
+
+        <ul class="hidden md:flex self-center text-lg">
+            <li><a href="../../pages/post/index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300 hidden post-link">post</a></li>
+            <li><a href="../../pages/profile/index.html#logout" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">profile</a></li>
+            <li><a href="../../pages/calendar/index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">calendar</a></li>
+            <li><a href="../../pages/login/index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">login/register</a></li>
+        </ul>
+
+        <div class="w-8 cursor-pointer" id="profile-box">
+            <img id="profile-menu" class="aspect-square object-cover rounded-full" src="../../uploads/profile/default.png" alt="">
+            <div id="profile-view" class="bg-white w-48 h-[284px] border-2 rounded-md z-50 absolute top-[62px] right-1 p-2 hidden flex-col items-center justify-evenly"></div>
+        </div>
+
+
+        <div id="menu" class="absolute bg-black w-full h-screen flex flex-col inset-0 -left-full transition-all duration-700">
+            <img id="menu-close" class="w-8 rounded-[5px] m-3 bg-white cursor-pointer" src="../../icons/close-icon.png" alt="close">
+            <a href="../../pages/post/index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300 hidden post-link">post</a>
+            <a href="../../pages/profile/index.html#logout" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">profile</a>
+            <a href="../../pages/calendar/index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">calendar</a>
+            <a href="../../pages/login/index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">login/register</a>
+        </div>
+    </div>
+
+    <div id="contents" class="w-full h-auto flex py-3 flex-wrap justify-evenly">
+        <p class="text-left text-4xl my-12">Post Event</p>
+        <form id="form" class="flex flex-col space-y-5 p-5 w-[95%] bg-white">
+            <p id="message-box" class="fixed rounded-md top-1/2 right-1/2 w-auto text-white font-bold tracking-wider bg-sky-400 px-5 py-4 translate-x-1/2 -translate-y-1/2 border-rose-50 border-2 hidden"></p>
+            <div class="flex flex-col my-3 space-y-2">
+                <label for="title">Title</label> <input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="text" placeholder="Title" id="title" required>
+            </div>
+            <div class="flex flex-col my-3 space-y-2">
+                <label for="date">Date</label><input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="date" placeholder="date" id="date" required>
+            </div>
+            <div class="flex flex-col my-3 space-y-2">
+                <label for="fromTime">Start time</label><input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="time" placeholder="start time" id="fromTime" required>
+            </div>
+            <div class="flex flex-col my-3 space-y-2">
+                <label for="toTime">To time</label> <input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="time" placeholder="To time" id="toTime" required>
+            </div>
+            <div class="flex flex-col my-3 space-y-2">
+                <label for="venue">Venue</label> <input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="text" placeholder="Venue" id="venue" required>
+            </div>
+            <div class="flex flex-col my-3 space-y-2">
+                <label for="club">Club</label><input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="text" placeholder="Club" id="club" required>
+            </div>
+            <div class="flex flex-col my-3 space-y-2">
+                <label for="image">Image</label><input type="file" placeholder="image" id="postImage" accept="image/*" required>
+            </div>
+            <div class="flex flex-col my-3 space-y-2">
+                <label for="smallDesc">Small Description</label><input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="text" placeholder="Small description" id="smallDesc" required>
+            </div>
+            <div class="flex flex-col my-3 space-y-2">
+                <label for="fullDesc">Full Description</label> <input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="text" placeholder="Full descriptiion" id="fullDesc" required><br>
+            </div>
+            <button type="submit" id="submit" value="submit" class="p-3 w-24 bg-sky-500 text-white rounded-md self-center">submit</button>
+        </form>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const menu = document.getElementById('menu');
+        const menuClose = document.getElementById('menu-close');
+        const menuOpen = document.getElementById('menu-open');
+        const profileMenu = document.getElementById('profile-menu');
+        const profileToggle = document.getElementById('profile-view');
+        const postLinks = Array.from(document.querySelectorAll('.post-link'));
+        const contents = document.getElementById('contents');
+        
+        const submit = document.getElementById('submit');
+        const form = document.getElementById('form');
+        const message = document.getElementById('message-box');
+
+        const setUser = () => {
+            const role = localStorage.getItem('role');
+            const profile = localStorage.getItem('profile') ? '../..'+localStorage.getItem('profile').split('/public')[1] : '../../uploads/profile/default.png';
+            const username = localStorage.getItem('username');
+            if (role == 'admin') {
+                postLinks.forEach(link => link.classList.remove('hidden'))
+            }
+
+            if (profile) {
+                profileMenu.src = profile;
+            }
+            const html = `
+               <div class="p-7">
+                 <img class="aspect-square object-cover rounded-full" id="profile" src="${profile ? profile : '../../uploads/profile/default.png'}" alt="profile">
+               </div>
+               <p class="mb-2">${username ? username : 'guest'}</p>
+               ${role ? `<p class="mb-2">role: ${role}</p>` : ''}
+               <div class="mb-2 ${role != undefined ? '': 'hidden'}">
+                 <a href="../../pages/profile/index.html#logout" class="bg-blue-500 px-3 py-1 rounded-md text-white">edit</a>
+                 <a href="../../pages/profile/index.html#logout" class="bg-black px-3 py-1 rounded-md text-white">logout</a>
+               </div>
+            `;
+            profileToggle.innerHTML = html;
+        }
+        
+        const postData = async(e) => {
+            e.preventDefault();
+            message.innerHTML = 'posting';
+            message.classList.remove('hidden');
+            message.classList.add('block');
+            submit.classList.add('cursor-not-allowed');
+            submit.disabled = true;
+
+            const input_title = document.getElementById('title');
+            const input_date = document.getElementById('date');
+            const input_fromTime = document.getElementById('fromTime');
+            const input_toTime = document.getElementById('toTime');
+            const input_venue = document.getElementById('venue');
+            const input_club = document.getElementById('club');
+            const input_smallDesc = document.getElementById('smallDesc');
+            const input_fullDesc = document.getElementById('fullDesc');
+            const input_image = document.getElementById('postImage');
+            const form = e.target;
+
+
+            const formData = new FormData();
+            formData.append('title', input_title.value);
+            formData.append('date', (input_date.value).toString());
+            formData.append('fromTime', (input_fromTime.value).toString());
+            formData.append('toTime', (input_toTime.value).toString());
+            formData.append('venue', input_venue.value);
+            formData.append('club', input_club.value);
+            formData.append('imagePost', input_image.files[0]);
+            formData.append('smallDesc', input_smallDesc.value);
+            formData.append('fullDesc', input_fullDesc.value);
+            console.log(input_image);
+            console.log(formData);
+
+            try {
+                const res = await axios.post('/events', formData, {
+                    headers: {
+                        'Content-type': 'multipart/form-data',
+                        'authorization': `Bearer ${localStorage.getItem('token')}`,
+                    }
+                });
+                message.style.backgroundColor = 'rgb(34 197 94)';
+                message.innerHTML = res.data.message;
+            } catch(err) {
+                message.style.backgroundColor = 'rgb(220 38 38)';
+                message.innerHTML = err.response.data.message;
+            }
+
+            submit.disabled = false;
+            submit.classList.remove('cursor-not-allowed');
+            setTimeout(() => {
+                message.classList.remove('block');
+                message.classList.add('hidden');
+                window.location.href = "../../index.html";
+            }, 2000);
+            form.reset();
+        };
+        
+        form.addEventListener('submit', e => postData(e))
+        
+        menuOpen.addEventListener('click', () => {
+            menu.classList.remove('-left-full');
+        });
+        menuClose.addEventListener('click', () => {
+            menu.classList.add('-left-full');
+        });
+        profileMenu.addEventListener('click', () => {
+            if (profileToggle.classList.contains('hidden')) {
+                profileToggle.classList.replace('hidden', 'flex');
+            } else {
+                profileToggle.classList.replace('flex', 'hidden');
+            }
+        });
+        setUser();
+    </script>
+</body>
+</html>
