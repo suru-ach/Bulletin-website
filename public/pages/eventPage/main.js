@@ -53,8 +53,8 @@ const populatePage = async (data) => {
                 ${fullDesc}
             </div>
             <div class="px-3 py-3 flex justify-between">
-                <p class="text-sm text-slate-500">created at ${createdAt}</p>
-                <p class="text-sm text-slate-500">updated at ${updatedAt}</p>
+                <p class="text-sm text-slate-500">created at ${createdAt.split('T')[0]+" "+createdAt.split('T')[1].slice(0,8)}</p>
+                <p class="text-sm text-slate-500">updated at ${updatedAt.split('T')[0]+" "+updatedAt.split('T')[1].slice(0,8)}</p>
             </div>  
             <div class="flex justify-between">
                 <div class="px-0 md:px-8 sm:px-14 py-3 flex items-center">

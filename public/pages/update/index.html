@@ -19,7 +19,7 @@
         </a>
 
         <ul class="hidden md:flex self-center text-lg">
-            <li><a href="../../index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">Menu</a></li>
+            <li><a href="../../index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">Home</a></li>
             <li><a href="../../pages/post/index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300 hidden post-link">Post</a></li>
             <li><a href="../../pages/profile/index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">Profile</a></li>
             <li><a href="../../pages/calendar/index.html" class="py-[1rem] px-3 hover:bg-sky-300 transition-colors duration-300">Calendar</a></li>
@@ -34,7 +34,7 @@
 
         <div id="menu" class="absolute bg-black w-full h-screen flex flex-col inset-0 -left-full transition-all duration-700">
             <img id="menu-close" class="w-8 rounded-[5px] m-3 bg-white cursor-pointer" src="../../icons/close-icon.png" alt="close">
-            <a href="../../index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">Menu</a>
+            <a href="../../index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">Home</a>
             <a href="../../pages/post/index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300 hidden post-link">Post</a>
             <a href="../../pages/profile/index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">Profile</a>
             <a href="../../pages/calendar/index.html" class="px-3 py-4 hover:bg-sky-300 text-white transition-colors duration-300">Calendar</a>
@@ -73,8 +73,10 @@
             <div class="flex flex-col my-3 space-y-2">
                 <label for="fullDesc">Full Description</label> <input class="p-3 border-2 border-slate-200 rounded-md focus:outline-none focus:border-sky-500"type="text" placeholder="Full descriptiion" id="fullDesc" required><br>
             </div>
-            <button type="submit" id="submit" value="submit" class="p-3 w-24 bg-sky-500 text-white rounded-md self-center">submit</button>
-            <button id="delete" class="p-3 w-24 bg-red-500 text-white rounded-md self-center">delete</button>
+            <div class="md:flex justify-center">
+                <button type="submit" id="submit" value="submit" class="p-3 mr-4 w-24 bg-sky-500 text-white rounded-md self-center">submit</button>
+                <button id="delete" class="p-3 ml-4 w-24 bg-red-500 text-white rounded-md self-center">delete</button>
+            </div>
         </form>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

@@ -1,6 +1,7 @@
 const { asyncWrapper } = require("../middleware/asyncWrapper");
 const { createCustomeError } = require("../errors/customError");
 const Event = require("../models/eventModel");
+const fs = require('fs');
 
 const getEvents = asyncWrapper(async(req, res, next) => {
     const eventsData = await Event.find({});
