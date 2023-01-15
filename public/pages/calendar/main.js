@@ -10,6 +10,9 @@ const setUser = () => {
     const role = localStorage.getItem('role');
     const profile = localStorage.getItem('profile') ? '../..' + localStorage.getItem('profile').split('/public')[1] : '../../uploads/profile/default.png';
     const username = localStorage.getItem('username');
+    if(role !== null) {
+        Array.from(document.querySelectorAll('.reg_log')).forEach(link => link.classList.add('hidden'));
+    }
     if (role == 'admin') {
         postLinks.forEach(link => link.classList.remove('hidden'))
     }
