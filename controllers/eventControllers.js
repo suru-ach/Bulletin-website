@@ -32,10 +32,10 @@ const postEvent = asyncWrapper(async(req, res, next) => {
 });
 
 const updateEvent = asyncWrapper(async(req, res, next) => {
-    const { id } = req.params;
+    const { id:_id } = req.params;
     req.body.calendarID = req.calendarID;
     
-    const newEvent = await Event.findOneAndUpdate({id}, req.body, {
+    const newEvent = await Event.findOneAndUpdate({_id}, req.body, {
         runValidators: true,
         new: true
     });
